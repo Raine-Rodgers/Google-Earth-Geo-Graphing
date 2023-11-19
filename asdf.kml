@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.0">
+<!-- Processed by GE-Graph 2.2.1 -->
+<Document>
+<name>asdf</name>
+  <open>1</open>
+  <LookAt>
+    <longitude>8.4977168</longitude>
+    <latitude>50.22440995</latitude>
+    <range>5583.07787657146</range>
+    <tilt>63</tilt>
+    <heading>-45</heading>
+  </LookAt>
+<Folder>
+  <open>0</open>
+ <name>Graph</name>
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff0068bc</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.47275915452634,50.222908231901,1309 8.47275921768783,50.2209447478931,1309 8.47582798231218,50.2209447478931,1309 8.47582804547367,50.222908231901,1309 8.47275915452634,50.222908231901,1309 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff000000</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.47287495092937,50.2237550498698,2205 8.47287517101202,50.220089879724,2205 8.47860342898799,50.220089879724,2205 8.47860364907062,50.2237550498698,2205 8.47287495092937,50.2237550498698,2205 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff0056a6</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.47489575813758,50.2230971758564,1516 8.4748958490901,50.2207409950471,1516 8.4785783509099,50.2207409950471,1516 8.47857844186242,50.2230971758564,1516 8.47489575813758,50.2230971758564,1516 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff009fff</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.48413449867207,50.2246804928616,826 8.48413451664027,50.2236333013905,826 8.48577128335972,50.2236333013905,826 8.48577130132792,50.2246804928616,826 8.48413449867207,50.2246804928616,826 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff008eea</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.50177200344133,50.2291043901782,964 8.50177203152344,50.2277954008394,964 8.50381816847655,50.2277954008394,964 8.50381819655868,50.2291043901782,964 8.50177200344133,50.2291043901782,964 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff00a7ff</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.51262284441762,50.228304744068,758 8.51262285817739,50.2273884515307,758 8.5140551418226,50.2273884515307,758 8.51405515558237,50.228304744068,758 8.51262284441762,50.228304744068,758 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff00428e</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.51323961172331,50.2285926665355,1791 8.5132397476308,50.2257128899914,1791 8.51774105236922,50.2257128899914,1791 8.51774118827669,50.2285926665355,1791 8.51323961172331,50.2285926665355,1791 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ffffffff</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.51819409999999,50.224983,275 8.51819409999999,50.224983,275 8.51819409999999,50.224983,275 8.51819409999999,50.224983,275 8.51819409999999,50.224983,275 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff0056a6</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.51687861988358,50.2240880758559,1516 8.51687871084118,50.2217318950466,1516 8.52056128915882,50.2217318950466,1516 8.52056138011643,50.2240880758559,1516 8.51687861988358,50.2240880758559,1516 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+
+<Placemark>
+   <Style>
+     <IconStyle><Icon><href>root://icons/palette-2.png</href><x>224</x><y>224</y><w>32</w><h>32</h></Icon></IconStyle>
+       <PolyStyle>
+         <color>ff007fd8</color>
+         <outline>1</outline>
+       </PolyStyle>
+      <LineStyle>
+         <color>ffff0000</color>
+      </LineStyle>
+   </Style>
+ <Polygon>
+    <extrude>1</extrude>
+    <altitudeMode>relativeToGround</altitudeMode>
+    <outerBoundaryIs>
+      <LinearRing>
+       <coordinates>
+8.51991248872985,50.2211553871377,1102 8.51991252914964,50.2195845999312,1102 8.52236747085034,50.2195845999312,1102 8.52236751127015,50.2211553871377,1102 8.51991248872985,50.2211553871377,1102 
+       </coordinates>
+      </LinearRing>
+   </outerBoundaryIs>
+ </Polygon>
+</Placemark>
+</Folder>
+</Document>
+</kml>
