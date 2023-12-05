@@ -1,13 +1,10 @@
-#Importing the components we need
-from PySide6.QtWidgets import QApplication, QWidget
+import kivy
+from kivy.app import App
+from kivy.uix.label import Label
 
-#The sys module is responsible for processing commmand line arguments
-import sys
+class MyApp(App):
+    def build(self):
+        return Label(text="hello World")
 
-app = QApplication(sys.argv)
-
-window = QWidget()
-window.show()
-
-#Start the event loop
-app.exec()
+if __name__ == '__main__':
+    MyApp().run()
