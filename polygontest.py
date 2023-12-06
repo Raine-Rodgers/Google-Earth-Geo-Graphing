@@ -3,6 +3,8 @@ import simplekml
 # Create a new KML object
 kml = simplekml.Kml()
 
+name = "polygon"
+
 x = 8.47287495092937
 y = 50.2237550498698
 z = 1000
@@ -16,7 +18,7 @@ coordinates = [
 ]
 
 # Create a new polygon with the defined coordinates
-pol = kml.newpolygon(name="Polygon", outerboundaryis=coordinates)
+pol = kml.newpolygon(name=name, outerboundaryis=coordinates)
 
 # Set the polygon style
 pol.extrude = 1
