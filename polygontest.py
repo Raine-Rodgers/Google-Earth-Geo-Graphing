@@ -1,17 +1,14 @@
 import simplekml
 
-# Create a new KML object
-kml = simplekml.Kml()
+class MakeFile():
+    def __init__(self, kml, fileName, XPreset, YPreset, ZPreset, coordinates):
+        self.kml = simplekml.Kml() # Create a new KML object
+        self.fileName = "polygon" # get name from title page
+        self.XPreset = 8.47287495092937 # make sure these work for different scales
+        self.YPreset = 50.2237550498698 # make sure these work for different scales
+        self.ZPreset = 1000 # make sure these work for different scales
+        self.coordinates = [[None]]
 
-# get name from title page
-name = "polygon"
-
-# make sure these work for different scales
-XPreset = 8.47287495092937
-YPreset = 50.2237550498698
-ZPreset = 1000
-
-coordinates = [[None] * 4] * 3
 # sets up coordinates
 def createCoords():
     coordinates = [

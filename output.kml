@@ -2,13 +2,13 @@
 <kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
     <Document id="1">
         <Placemark id="3">
-            <name>Polygon</name>
+            <name>polygon</name>
             <Polygon id="2">
                 <extrude>1</extrude>
                 <altitudeMode>relativeToGround</altitudeMode>
                 <outerBoundaryIs>
                     <LinearRing id="4">
-                        <coordinates>8.47307495092937,50.2239550498698,1000 8.47267495092937,50.2239550498698,1000 8.47267495092937,50.2236550498698,1000 8.47307495092937,50.2236550498698,1000 8.47307495092937,50.2239550498698,1000</coordinates>
+                        <coordinates>None,None,None</coordinates>
                     </LinearRing>
                 </outerBoundaryIs>
             </Polygon>
