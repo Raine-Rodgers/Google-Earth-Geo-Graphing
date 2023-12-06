@@ -5,18 +5,19 @@ kml = simplekml.Kml()
 
 name = "polygon"
 
-x = 8.47287495092937
-y = 50.2237550498698
-z = 1000
+XPreset = 8.47287495092937
+YPreset = 50.2237550498698
+ZPreset = 1000
+def createCoords():
+    coordinates = [
+        (XPreset+0.0002, YPreset+0.0002, ZPreset),
+        (XPreset-0.0002, YPreset+0.0002, ZPreset),
+        (XPreset-0.0002, YPreset-0.0001, ZPreset),
+        (XPreset+0.0002, YPreset-0.0001, ZPreset),
+        (XPreset+0.0002, YPreset+0.0002, ZPreset)
+    ]
 
-coordinates = [
-    (x+0.0002, y+0.0002, 1000),
-    (x-0.0002, y+0.0002, 1000),
-    (x-0.0002, y-0.0001, 1000),
-    (x+0.0002, y-0.0001, 1000),
-    (x+0.0002, y+0.0002, 1000)
-]
-
+createCoord()
 # Create a new polygon with the defined coordinates
 pol = kml.newpolygon(name=name, outerboundaryis=coordinates)
 
