@@ -27,11 +27,5 @@ class MakeFile:
     # kml.save("output.kml")
 
 # Create a new polygon with the defined coordinates
-    createCoords(3, 5, 10)
-
-    saveFile("Test", "Name", 5)
-
-
-
-
-
+    createCoords(3, 5, 10, 5)
+    saveFile("Test", "Name", self.coords)
