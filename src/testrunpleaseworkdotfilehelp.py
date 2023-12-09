@@ -1,1 +1,0 @@
-from polygontest import *

@@ -1,3 +1,4 @@
+import simplekml
 
 class CreateCoordinates:
     def __init__(self, x, y, z, name):
@@ -15,4 +16,12 @@ class CreateCoordinates:
     def getZ():
         return z
     
-    pol = kml.newpolygon(name=name, outerboundaryis=coordinates)
+
+    class MakeFile:
+        kml = simplekml.Kml ()
+        def __init__(self, coordObj, fileName):
+            self.__coordObj = coordObj
+            self.__fileName = fileName
+
+        def saveFile():
+            pol = kml.newpolygon(name=__fileName, outerboundaryis=coordObj)
