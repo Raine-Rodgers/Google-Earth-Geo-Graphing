@@ -21,17 +21,18 @@ class CreateCoordinates:
         return self.__name
 
 # a class to create polygons and save the file
-    class MakeFile:
-        def __init__(self, coordObjList, fileName):
-            self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
-            self.__fileName = fileName  # name of the file
-            self.__kml = simplekml.Kml() # creat the kml variable to use
+class MakeFile:
+    def __init__(self, coordObjList, fileName):
+        self.__coordObjList = [coordObjList] # a list of coordinate objects created in the class above
+        self.__fileName = fileName  # name of the file
+        self.__kml = simplekml.Kml() # creat the kml variable to use
 
-        def saveFile(self):
-            self.kml.save(self.__fileName + ".kml") # saves file with a name stored in a variable
+    def saveFile(self):
+        self.kml.save(self.__fileName + ".kml") # saves file with a name stored in a variable
 
-        def makePolygon(self):
-            for __coordObj in self.__coordObjList: # iterate through the list of coordinate objects
-                pol = self.__kml.newpolygon(name=self.__fileName, outerboundaryis=self.__coordObj) # create new polygon with the oldest one being saved
-                pol.extrude = 1 # connect it to the roud
-                pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
+    def makePolygon(self):
+        for i in self.__coordObjList: # iterate through the list of coordinate objects
+            pol = self.__kml.newpolygon(name=self.__fileName, outerboundaryis=self.__coordObjList[i].getX()) # create new polygon with the oldest one being saved
+            print(self.__coordObjList[coordObj])
+            pol.extrude = 1 # connect it to the roud
+            pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
