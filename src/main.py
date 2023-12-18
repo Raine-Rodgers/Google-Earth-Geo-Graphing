@@ -1,7 +1,8 @@
 import simplekml
 from polygontest import *
 
-row = 5
+
+rowCount = 5 # change to recieve from gui 
 
 objList = [None]*row
 
@@ -11,3 +12,8 @@ for i in range(row):
 polCreate = MakeFile(objList, "test")
 
 polCreate.makePolygon()
+
+# make x dynamic
+# make y dynamic
+# make z dynamic
+# make file name dynamic
