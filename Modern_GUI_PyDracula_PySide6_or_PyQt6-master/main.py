@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
 
         # TOGGLE MENU
         # ///////////////////////////////////////////////////////////////
-#        widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
+        widgets.toggleButton.clicked.connect(lambda: UIFunctions.toggleMenu(self, True))
 
         # SET UI DEFINITIONS
         # ///////////////////////////////////////////////////////////////
@@ -69,7 +69,7 @@ class MainWindow(QMainWindow):
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.buttonClick)
 #        widgets.btn_widgets.clicked.connect(self.buttonClick)
-#        widgets.btn_new.clicked.connect(self.buttonClick)
+        widgets.btn_new.clicked.connect(self.buttonClick)
 #        widgets.btn_save.clicked.connect(self.buttonClick)
 
         # EXTRA LEFT BOX
@@ -90,20 +90,20 @@ class MainWindow(QMainWindow):
         # SET CUSTOM THEME
         # ///////////////////////////////////////////////////////////////
         useCustomTheme = False
-        themeFile = "themes\py_dracula_light.qss"
+        # themeFile = "themes\py_dracula_light.qss"
 
         # SET THEME AND HACKS
-        if useCustomTheme:
-            # LOAD AND APPLY STYLE
-            UIFunctions.theme(self, themeFile, True)
+        # if useCustomTheme:
+        #     # LOAD AND APPLY STYLE
+        #     UIFunctions.theme(self, themeFile, True)
 
-            # SET HACKS
-            AppFunctions.setThemeHack(self)
+        #     # SET HACKS
+        #     AppFunctions.setThemeHack(self)
 
         # SET HOME PAGE AND SELECT MENU
         # ///////////////////////////////////////////////////////////////
-        widgets.stackedWidget.setCurrentWidget(widgets.home)
-        widgets.btn_home.setStyleSheet(UIFunctions.selectMenu(widgets.btn_home.styleSheet()))
+        widgets.stackedWidget.setCurrentWidget(widgets.widgets)
+        widgets.widgets.setStyleSheet(UIFunctions.selectMenu(widgets.widgets.styleSheet()))
 
 
     # BUTTONS CLICK
@@ -115,9 +115,14 @@ class MainWindow(QMainWindow):
         btnName = btn.objectName()
 
         # SHOW HOME PAGE
+        # if btnName == "btn_home":
+        #     widgets.stackedWidget.setCurrentWidget(widgets.home)
+        #     UIFunctions.resetStyle(self, btnName)
+        #     btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
+
         if btnName == "btn_home":
-            widgets.stackedWidget.setCurrentWidget(widgets.home)
-            UIFunctions.resetStyle(self, btnName)
+            widgets.stackedWidget.setCurrentWidget(widgets.widgets)
+            UIFunctions.resetStyle(self, "btn_widget")
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet()))
 
         # SHOW WIDGETS PAGE
