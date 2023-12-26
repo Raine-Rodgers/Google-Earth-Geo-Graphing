@@ -1029,7 +1029,9 @@ class Ui_MainWindow(object):
                 self.tableWidget.setFrameShape(QFrame.NoFrame)
                 self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
                 self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-                self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
+
+                self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
+
                 self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
                 self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
                 self.tableWidget.setShowGrid(True)
