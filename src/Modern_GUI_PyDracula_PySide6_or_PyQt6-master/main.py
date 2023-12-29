@@ -156,7 +156,7 @@ class MainWindow(QMainWindow):
                     name=self.tableWidget.item(row, column)
                 elif column == 3:
                     value=self.tableWidget.item(row, column)
-                    
+                coordinates = CreateCoordinates(x, y, value, name)
             column = 0
             # rowCount() This property holds the number of rows in the table
             for row in range(self.table_widget.rowCount()): 
