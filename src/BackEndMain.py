@@ -1,6 +1,5 @@
 import simplekml
-from polygontest import *
-
+from polygonMake import *
 
 rowCount = 5 # change to recieve from gui 
 

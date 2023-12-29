@@ -17,6 +17,7 @@
 import sys
 import os
 import platform
+from BackEnd.polygonMake import *
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -45,8 +46,8 @@ class MainWindow(QMainWindow):
 
         # APP NAME
         # ///////////////////////////////////////////////////////////////
-        title = "PyDracula - Modern GUI"
-        description = "PyDracula APP - Theme with colors based on Dracula for Python."
+        title = "GE Creator"
+        description = "Google Earth Graphing Creator"
         # APPLY TEXTS
         self.setWindowTitle(title)
         widgets.titleRightInfo.setText(description)
@@ -70,6 +71,8 @@ class MainWindow(QMainWindow):
         widgets.btn_home.clicked.connect(self.buttonClick)
 #        widgets.btn_widgets.clicked.connect(self.buttonClick)
         widgets.btn_new.clicked.connect(self.buttonClick)
+#        widgets.btn_new.clicked.connect(self.buttonClick)
+        widgets.btn_save.clicked.connect(self.buttonClick)
 #        widgets.btn_save.clicked.connect(self.buttonClick)
 
         # EXTRA LEFT BOX
@@ -138,8 +141,35 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "btn_save":
+            row = 0
+            column = 0
+            name = ""
+            value = 0
+            # create coords
+#            for item in self.table_widget.items():
+            for column in range(self.tableWidget.columnCount()):
+                if column == 0:
+                    x=self.tableWidget.item(row, column)
+                elif column == 1:
+                    y=self.tableWidget.item(row, column)
+                elif column == 2:
+                    name=self.tableWidget.item(row, column)
+                elif column == 3:
+                    value=self.tableWidget.item(row, column)
+                    
+            column = 0
+            # rowCount() This property holds the number of rows in the table
+            for row in range(self.table_widget.rowCount()): 
+                # item(row, 0) Returns the item for the given row and column if one has been set; otherwise returns nullptr.
+                _item = self.table_widget.item(row, column) 
+                if _item:            
+                    item = self.table_widget.item(row, column).text()
+                    print(f'row: {row}, column: {column}, item={item}')
+            # create poly
+            # create file
             print("Save BTN clicked!")
 
+        #if btnName == "":
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 

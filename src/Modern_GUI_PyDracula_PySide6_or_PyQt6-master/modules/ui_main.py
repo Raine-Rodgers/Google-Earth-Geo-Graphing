@@ -647,6 +647,14 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout_8.addWidget(self.btn_new)
 
+                self.btn_save = QPushButton(self.topMenu)
+                self.btn_save.setObjectName(u"btn_save")
+                self.btn_save.setMinimumSize(QSize(0, 45))
+                self.btn_save.setCursor(QCursor(Qt.PointingHandCursor))
+                self.btn_save.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-save.png);")
+
+                self.verticalLayout_8.addWidget(self.btn_save)
+
 
                 self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
 
@@ -970,6 +978,7 @@ class Ui_MainWindow(object):
                 __qtablewidgetitem19 = QTableWidgetItem()
                 self.tableWidget.setVerticalHeaderItem(15, __qtablewidgetitem19)
                 __qtablewidgetitem20 = QTableWidgetItem()
+                __qtablewidgetitem20.setFlags(Qt.ItemIsSelectable|Qt.ItemIsDragEnabled|Qt.ItemIsDropEnabled|Qt.ItemIsUserCheckable|Qt.ItemIsEnabled);
                 self.tableWidget.setItem(0, 0, __qtablewidgetitem20)
                 __qtablewidgetitem21 = QTableWidgetItem()
                 self.tableWidget.setItem(0, 1, __qtablewidgetitem21)
@@ -977,6 +986,10 @@ class Ui_MainWindow(object):
                 self.tableWidget.setItem(0, 2, __qtablewidgetitem22)
                 __qtablewidgetitem23 = QTableWidgetItem()
                 self.tableWidget.setItem(0, 3, __qtablewidgetitem23)
+                __qtablewidgetitem24 = QTableWidgetItem()
+                self.tableWidget.setItem(1, 0, __qtablewidgetitem24)
+                __qtablewidgetitem25 = QTableWidgetItem()
+                self.tableWidget.setItem(1, 2, __qtablewidgetitem25)
                 self.tableWidget.setObjectName(u"tableWidget")
                 self.tableWidget.setEnabled(True)
                 sizePolicy3 = QSizePolicy(QSizePolicy.Expanding, QSizePolicy.Expanding)
@@ -1029,9 +1042,7 @@ class Ui_MainWindow(object):
                 self.tableWidget.setFrameShape(QFrame.NoFrame)
                 self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
                 self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
-
-                self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
-
+                self.tableWidget.setEditTriggers(QAbstractItemView.NoEditTriggers)
                 self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
                 self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
                 self.tableWidget.setShowGrid(True)
@@ -1089,10 +1100,10 @@ class Ui_MainWindow(object):
 
                 self.horizontalLayout_6.addWidget(self.label)
 
-                self.lineEdit_2 = QLineEdit(self.new_page)
-                self.lineEdit_2.setObjectName(u"lineEdit_2")
+                self.spinBox = QSpinBox(self.new_page)
+                self.spinBox.setObjectName(u"spinBox")
 
-                self.horizontalLayout_6.addWidget(self.lineEdit_2)
+                self.horizontalLayout_6.addWidget(self.spinBox)
 
                 self.formLayout = QFormLayout()
                 self.formLayout.setObjectName(u"formLayout")
@@ -1120,16 +1131,6 @@ class Ui_MainWindow(object):
                 self.lineEdit_3.setMaximumSize(QSize(761, 16777215))
 
                 self.horizontalLayout_11.addWidget(self.lineEdit_3)
-
-                self.label_3 = QLabel(self.groupBox_2)
-                self.label_3.setObjectName(u"label_3")
-
-                self.horizontalLayout_11.addWidget(self.label_3)
-
-                self.spinBox = QSpinBox(self.groupBox_2)
-                self.spinBox.setObjectName(u"spinBox")
-
-                self.horizontalLayout_11.addWidget(self.spinBox)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_2, 0, 1, 1, 1)
@@ -1298,7 +1299,7 @@ class Ui_MainWindow(object):
 
                 self.retranslateUi(MainWindow)
 
-                self.stackedWidget.setCurrentIndex(2)
+                self.stackedWidget.setCurrentIndex(1)
 
 
                 QMetaObject.connectSlotsByName(MainWindow)
@@ -1309,6 +1310,7 @@ class Ui_MainWindow(object):
                 self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
                 self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
                 self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
+                self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
                 self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
                 self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Google Earth Graph Creator", None))
         #if QT_CONFIG(tooltip)
@@ -1391,23 +1393,22 @@ class Ui_MainWindow(object):
                 self.label.setText(QCoreApplication.translate("MainWindow", u"Polygon Count  ", None))
                 self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
                 self.label_2.setText(QCoreApplication.translate("MainWindow", u"Size", None))
-                self.label_3.setText(QCoreApplication.translate("MainWindow", u"TextLabel", None))
                 self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
                 self.label_4.setText(QCoreApplication.translate("MainWindow", u"Factor", None))
                 self.label_5.setText(QCoreApplication.translate("MainWindow", u"          Add Altitude", None))
                 self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
-                self.radioButton_5.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
-                self.radioButton_6.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
+                self.radioButton_5.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_6.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
                 self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
-                self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
-                self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
+                self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
-                self.radioButton_7.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
-                self.radioButton_8.setText(QCoreApplication.translate("MainWindow", u"RadioButton", None))
+                self.radioButton_7.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_8.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
                 self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
                 self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Outline", None))
                 self.label_6.setText(QCoreApplication.translate("MainWindow", u"Work in Progress Function", None))
                 self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Raine M. Rodgers", None))
                 self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0", None))
-                # retranslateUi
+        # retranslateUi
 

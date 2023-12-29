@@ -1,5 +1,11 @@
 import simplekml
 
+# make x dynamic
+# make y dynamic
+# make z dynamic
+# make file name dynamic
+
+
 # create an object with x, y, z values, a name for the polyogn. the z coordinate will represent the value of the polyogn
 class CreateCoordinates:
     def __init__(self, x, y, z, name):
