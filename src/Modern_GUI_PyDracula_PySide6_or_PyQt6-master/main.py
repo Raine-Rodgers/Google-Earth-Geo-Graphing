@@ -143,20 +143,41 @@ class MainWindow(QMainWindow):
         if btnName == "btn_save":
             row = 0
             column = 0
-            name = ""
+            x = 0
+            y = 0
+            polygonName = ""
             value = 0
+            coordinates = []
+            fileName = ""
+
+            def isEmpty():
+                if widgets.tableWidget.item(row, column) is None: return True
+                else: return False
             # create coords
-#            for item in self.table_widget.items():
-            for column in range(self.tableWidget.columnCount()):
-                if column == 0:
-                    x=self.tableWidget.item(row, column)
-                elif column == 1:
-                    y=self.tableWidget.item(row, column)
-                elif column == 2:
-                    name=self.tableWidget.item(row, column)
-                elif column == 3:
-                    value=self.tableWidget.item(row, column)
-                coordinates = CreateCoordinates(x, y, value, name)
+            # ///////////////////////////////////////////////////////////////
+            # for item in self.table_widget.items():
+            for row in range(widgets.tableWidget.rowCount()):
+                for column in range(widgets.tableWidget.columnCount()):
+                    if column == 0:
+                        if isEmpty(): x = 48.0677873; y = 12.8578328
+                        else: x=widgets.tableWidget.item(row, column)
+                    elif column == 1:
+                        if isEmpty(): x = 48.0677873; y = 12.8578328
+                        else: y=widgets.tableWidget.item(row, column)
+                    elif column == 2:
+                        if isEmpty(): polygonName = "No-Name"
+                        else: polygonName=widgets.tableWidget.item(row, column)
+                    elif column == 3:
+                        if isEmpty(): value = 500 #; polygonName + " No-Value"
+                        value=widgets.tableWidget.item(row, column)
+                coordinates.append(CreateCoordinates(x, y, value, polygonName))
+                print(coordinates[0].getName())
+            # finalFile = MakeFile(coordinates, widgets.lineEdit.text())
+            # finalFile.makePolygon()
+            # finalFile.saveFile()
+
+            '''
+                # COPIED CODE
             column = 0
             # rowCount() This property holds the number of rows in the table
             for row in range(self.table_widget.rowCount()): 
@@ -167,9 +188,8 @@ class MainWindow(QMainWindow):
                     print(f'row: {row}, column: {column}, item={item}')
             # create poly
             # create file
-            print("Save BTN clicked!")
+            '''
 
-        #if btnName == "":
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
@@ -196,4 +216,4 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon("icon.ico"))
     window = MainWindow()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
