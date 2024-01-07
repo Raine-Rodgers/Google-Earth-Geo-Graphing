@@ -74,6 +74,10 @@ class MainWindow(QMainWindow):
 #        widgets.btn_new.clicked.connect(self.buttonClick)
         widgets.btn_save.clicked.connect(self.buttonClick)
 #        widgets.btn_save.clicked.connect(self.buttonClick)
+        widgets.AddRowButton.clicked.connect(self.buttonClick)
+#        widgets.btn_save.clicked.connect(self.buttonClick)
+        widgets.DeleteRowButton.clicked.connect(self.buttonClick)
+#        widgets.btn_save.clicked.connect(self.buttonClick)
 
         # EXTRA LEFT BOX
         def openCloseLeftBox():
@@ -140,13 +144,21 @@ class MainWindow(QMainWindow):
             UIFunctions.resetStyle(self, btnName) # RESET ANOTHERS BUTTONS SELECTED
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
+        if btnName == "AddRowButton":
+            row_position = widgets.tableWidget.rowCount()
+            widgets.tableWidget.insertRow(row_position)
+
+        if btnName == "DeleteRowButton":
+            if widgets.tableWidget.rowCount() > 1:
+                widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
+
         if btnName == "btn_save":
             row = 0
             column = 0
-            x = 0
-            y = 0
+            x = float(0)
+            y = float(0)
             polygonName = ""
-            value = 0
+            value = float(0)
             coordinates = []
             fileName = ""
 
@@ -156,40 +168,25 @@ class MainWindow(QMainWindow):
             # create coords
             # ///////////////////////////////////////////////////////////////
             # for item in self.table_widget.items():
-            for row in range(widgets.tableWidget.rowCount()):
+            for row in range(1, widgets.tableWidget.rowCount()):
                 for column in range(widgets.tableWidget.columnCount()):
                     if column == 0:
                         if isEmpty(): x = 48.0677873; y = 12.8578328
-                        else: x=widgets.tableWidget.item(row, column)
+                        else: x=float(widgets.tableWidget.item(row, column).text())
                     elif column == 1:
                         if isEmpty(): x = 48.0677873; y = 12.8578328
-                        else: y=widgets.tableWidget.item(row, column)
+                        else: y=float(widgets.tableWidget.item(row, column).text())
                     elif column == 2:
                         if isEmpty(): polygonName = "No-Name"
-                        else: polygonName=widgets.tableWidget.item(row, column)
+                        else: polygonName=widgets.tableWidget.item(row, column).text()
                     elif column == 3:
                         if isEmpty(): value = 500 #; polygonName + " No-Value"
-                        value=widgets.tableWidget.item(row, column)
+                        value=float(widgets.tableWidget.item(row, column).text())
                 coordinates.append(CreateCoordinates(x, y, value, polygonName))
-                print(coordinates[0].getName())
-            # finalFile = MakeFile(coordinates, widgets.lineEdit.text())
-            # finalFile.makePolygon()
-            # finalFile.saveFile()
 
-            '''
-                # COPIED CODE
-            column = 0
-            # rowCount() This property holds the number of rows in the table
-            for row in range(self.table_widget.rowCount()): 
-                # item(row, 0) Returns the item for the given row and column if one has been set; otherwise returns nullptr.
-                _item = self.table_widget.item(row, column) 
-                if _item:            
-                    item = self.table_widget.item(row, column).text()
-                    print(f'row: {row}, column: {column}, item={item}')
-            # create poly
-            # create file
-            '''
-
+            finalFile = MakeFile(coordinates, widgets.lineEdit.text())
+            finalFile.makePolygon()
+            finalFile.saveFile()
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
