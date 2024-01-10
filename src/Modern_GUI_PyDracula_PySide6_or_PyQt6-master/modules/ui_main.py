@@ -1398,14 +1398,20 @@ class Ui_MainWindow(object):
                 self.label_4.setText(QCoreApplication.translate("MainWindow", u"Factor", None))
                 self.label_5.setText(QCoreApplication.translate("MainWindow", u"          Add Altitude", None))
                 self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
+
+                # Height radio buttons
                 self.radioButton_5.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
-                self.radioButton_6.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_6.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
+
+                # Size radio buttons
                 self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
                 self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
+
+                # Color radio buttons
                 self.radioButton_7.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
-                self.radioButton_8.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_8.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
                 self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Outline", None))
                 self.label_6.setText(QCoreApplication.translate("MainWindow", u"Work in Progress Function", None))

@@ -160,31 +160,55 @@ class MainWindow(QMainWindow):
             polygonName = ""
             value = float(0)
             coordinates = []
-            fileName = ""
+            outlineIsChecked = False
+            constantHeight = False
 
-            def isEmpty():
-                if widgets.tableWidget.item(row, column) is None: return True
+            def isCellEmpty():
+                if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
+                    return True
+                else:
+                    return False
+
+            # function which sets value variable to the input of line edit 5 if radio button 6 is checked
+            # ///////////////////////////////////////////////////////////////
+            def CheckConstantHeight():
+                if widgets.radioButton_6.isChecked() and not CheckLineEdit5Empty():
+                    value = float(widgets.lineEdit_5.text())
+                else: value = 0
+            
+            # is line edit 5 empty
+            # ///////////////////////////////////////////////////////////////
+            def CheckLineEdit5Empty():
+                if widgets.lineEdit_5.text() == ('' or ""): return True
                 else: return False
             # create coords
             # ///////////////////////////////////////////////////////////////
-            # for item in self.table_widget.items():
+            
             for row in range(1, widgets.tableWidget.rowCount()):
                 for column in range(widgets.tableWidget.columnCount()):
                     if column == 0:
-                        if isEmpty(): print("Empty"); x = 48.0677873; y = 12.8578328
+                        if isCellEmpty(): x = 48.0677873; y = 12.8578328
                         else: x=float(widgets.tableWidget.item(row, column).text())
                     elif column == 1:
-                        if isEmpty(): x = 48.0677873; y = 12.8578328
+                        if isCellEmpty(): x = 48.0677873; y = 12.8578328
                         else: y=float(widgets.tableWidget.item(row, column).text())
                     elif column == 2:
-                        if isEmpty(): polygonName = "No-Name"
+                        if isCellEmpty(): polygonName = "No-Name"
                         else: polygonName=widgets.tableWidget.item(row, column).text()
                     elif column == 3:
-                        if isEmpty(): value = 500 #; polygonName + " No-Value"
-                        else: value=float(widgets.tableWidget.item(row, column).text())
+                        if not isCellEmpty(): value=float(widgets.tableWidget.item(row, column).text())
+                        elif CheckLineEdit5Empty(): value = 0
+                        else: CheckConstantHeight()
                 coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
-            finalFile = MakeFile(coordinates, widgets.lineEdit.text())
+            # if outline is checked outlineIsChecked = True
+            # ///////////////////////////////////////////////////////////////
+            if widgets.checkBox.isChecked(): outlineIsChecked = True
+            # if radio button 6 is checked constantHeight = True
+            # ///////////////////////////////////////////////////////////////
+            if widgets.radioButton_6.isChecked(): constantHeight = True
+            else: constantHeight = False
+            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
             finalFile.makePolygon()
             finalFile.saveFile()
         # PRINT BTN NAME

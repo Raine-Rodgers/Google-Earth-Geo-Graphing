@@ -30,26 +30,30 @@ class CreateCoordinates:
 # a class to create polygons and save the file
 # ///////////////////////////////////////////////////////////////
 class MakeFile:
-    def __init__(self, coordObjList, fileName):
+    def __init__(self, coordObjList, fileName, outlineIsChecked):
         self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
         self.__fileName = fileName  # name of the file
         self.__kml = simplekml.Kml() # creat the kml variable to uses
+        self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
 
     def saveFile(self):
         self.__kml.save(self.__fileName + ".kml") # saves file with a name stored in a variable
 
+    
+    
+    
+    
     def makePolygon(self):
         for i in range(len(self.__coordObjList)): # iterate through the list of coordinate objects
             pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),
                                                                                                 (self.__coordObjList[i].getX()+0.00039, self.__coordObjList[i].getY()-0.00019, self.__coordObjList[i].getZ()),
                                                                                                 (self.__coordObjList[i].getX()+0.00062, self.__coordObjList[i].getY()+0.00013, self.__coordObjList[i].getZ()),
                                                                                                 (self.__coordObjList[i].getX()+0.00023, self.__coordObjList[i].getY()+0.00033, self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),]) # create new polygon with the oldest one being saved
-                                                                                                # [(18.43348,-33.98985), 
-                                                                                                # (18.43387,-33.99004),
-                                                                                                # (18.43410,-33.98972), 
-                                                                                                # (18.43371,-33.98952),
-                                                                                                # (18.43348,-33.98985)])
+                                                                                                (self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),])
             print(self.__coordObjList[i])
             pol.extrude = 1 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
+            pol.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.green) # set color of polygon
+            pol.style.polystyle.outline = 1 # set outline of polygon
+            pol.style.polystyle.fill = 1 # set fill of polygon
+            pol.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon
