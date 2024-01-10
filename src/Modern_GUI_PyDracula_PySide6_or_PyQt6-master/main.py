@@ -171,7 +171,7 @@ class MainWindow(QMainWindow):
             for row in range(1, widgets.tableWidget.rowCount()):
                 for column in range(widgets.tableWidget.columnCount()):
                     if column == 0:
-                        if isEmpty(): x = 48.0677873; y = 12.8578328
+                        if isEmpty(): print("Empty"); x = 48.0677873; y = 12.8578328
                         else: x=float(widgets.tableWidget.item(row, column).text())
                     elif column == 1:
                         if isEmpty(): x = 48.0677873; y = 12.8578328
@@ -181,7 +181,7 @@ class MainWindow(QMainWindow):
                         else: polygonName=widgets.tableWidget.item(row, column).text()
                     elif column == 3:
                         if isEmpty(): value = 500 #; polygonName + " No-Value"
-                        value=float(widgets.tableWidget.item(row, column).text())
+                        else: value=float(widgets.tableWidget.item(row, column).text())
                 coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
             finalFile = MakeFile(coordinates, widgets.lineEdit.text())

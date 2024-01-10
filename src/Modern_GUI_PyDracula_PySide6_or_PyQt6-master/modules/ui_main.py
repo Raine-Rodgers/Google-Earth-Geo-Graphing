@@ -1378,13 +1378,13 @@ class Ui_MainWindow(object):
                 __sortingEnabled = self.tableWidget.isSortingEnabled()
                 self.tableWidget.setSortingEnabled(False)
                 ___qtablewidgetitem20 = self.tableWidget.item(0, 0)
-                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Test", None));
+                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Latitude", None));
                 ___qtablewidgetitem21 = self.tableWidget.item(0, 1)
-                ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Text", None));
+                ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Longitude", None));
                 ___qtablewidgetitem22 = self.tableWidget.item(0, 2)
-                ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Cell", None));
+                ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Name", None));
                 ___qtablewidgetitem23 = self.tableWidget.item(0, 3)
-                ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
+                ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Value", None));
                 self.tableWidget.setSortingEnabled(__sortingEnabled)
 
                 self.AddRowButton.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))

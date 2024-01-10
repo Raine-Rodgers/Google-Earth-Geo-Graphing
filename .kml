@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Placemark id="3">
+            <name>No-Name</name>
+            <Polygon id="2">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="4">
+                        <coordinates>48.0677873,12.8578328,500 48.0681773,12.8576428,500 48.0684073,12.857962800000001,500 48.0680173,12.8581628,500 48.0677873,12.8578328,500</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="7">
+            <name>No-Name</name>
+            <Polygon id="6">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="8">
+                        <coordinates>48.0677873,12.8578328,500 48.0681773,12.8576428,500 48.0684073,12.857962800000001,500 48.0680173,12.8581628,500 48.0677873,12.8578328,500</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="11">
+            <name>No-Name</name>
+            <Polygon id="10">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="12">
+                        <coordinates>48.0677873,12.8578328,500 48.0681773,12.8576428,500 48.0684073,12.857962800000001,500 48.0680173,12.8581628,500 48.0677873,12.8578328,500</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="15">
+            <name>No-Name</name>
+            <Polygon id="14">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="16">
+                        <coordinates>48.0677873,12.8578328,500 48.0681773,12.8576428,500 48.0684073,12.857962800000001,500 48.0680173,12.8581628,500 48.0677873,12.8578328,500</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="19">
+            <name>No-Name</name>
+            <Polygon id="18">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="20">
+                        <coordinates>48.0677873,12.8578328,500 48.0681773,12.8576428,500 48.0684073,12.857962800000001,500 48.0680173,12.8581628,500 48.0677873,12.8578328,500</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>
