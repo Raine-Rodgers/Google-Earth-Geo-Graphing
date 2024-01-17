@@ -145,8 +145,7 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "AddRowButton":
-            row_position = widgets.tableWidget.rowCount()
-            widgets.tableWidget.insertRow(row_position)
+            widgets.tableWidget.insertRow(widgets.tableWidget.rowCount())
 
         if btnName == "DeleteRowButton":
             if widgets.tableWidget.rowCount() > 1:
@@ -187,10 +186,10 @@ class MainWindow(QMainWindow):
             for row in range(1, widgets.tableWidget.rowCount()):
                 for column in range(widgets.tableWidget.columnCount()):
                     if column == 0:
-                        if isCellEmpty(): x = 48.0677873; y = 12.8578328
+                        if isCellEmpty(): x = 0.0; y = 0.0
                         else: x=float(widgets.tableWidget.item(row, column).text())
                     elif column == 1:
-                        if isCellEmpty(): x = 48.0677873; y = 12.8578328
+                        if isCellEmpty(): x = 0.0; y = 0.0
                         else: y=float(widgets.tableWidget.item(row, column).text())
                     elif column == 2:
                         if isCellEmpty(): polygonName = "No-Name"
