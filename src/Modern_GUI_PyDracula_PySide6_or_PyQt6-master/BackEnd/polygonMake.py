@@ -53,7 +53,8 @@ class MakeFile:
             print(self.__coordObjList[i])
             pol.extrude = 1 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
-            pol.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.green) # set color of polygon
-            pol.style.polystyle.outline = 1 # set outline of polygon
+            pol.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.green) # set color of polygonw
+            if self.__outlineIsChecked: pol.style.polystyle.outline = 1
+            else: pol.style.polystyle.outline = 0
             pol.style.polystyle.fill = 1 # set fill of polygon
             pol.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon

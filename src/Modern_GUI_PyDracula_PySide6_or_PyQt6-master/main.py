@@ -161,7 +161,6 @@ class MainWindow(QMainWindow):
             value = float(0)
             coordinates = []
             outlineIsChecked = False
-            constantHeight = False
 
             def isCellEmpty():
                 if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
@@ -201,13 +200,8 @@ class MainWindow(QMainWindow):
                         else: CheckConstantHeight()
                 coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
-            # if outline is checked outlineIsChecked = True
-            # ///////////////////////////////////////////////////////////////
             if widgets.checkBox.isChecked(): outlineIsChecked = True
-            # if radio button 6 is checked constantHeight = True
-            # ///////////////////////////////////////////////////////////////
-            if widgets.radioButton_6.isChecked(): constantHeight = True
-            else: constantHeight = False
+
             finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
             finalFile.makePolygon()
             finalFile.saveFile()
@@ -232,6 +226,7 @@ class MainWindow(QMainWindow):
             print('Mouse click: LEFT CLICK')
         if event.buttons() == Qt.RightButton:
             print('Mouse click: RIGHT CLICK')
+            #TODO: test
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
