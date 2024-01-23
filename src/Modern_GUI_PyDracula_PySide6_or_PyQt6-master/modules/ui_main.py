@@ -897,17 +897,17 @@ class Ui_MainWindow(object):
 
                 self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
 
-                self.pushButton = QPushButton(self.frame_content_wid_1)
-                self.pushButton.setObjectName(u"pushButton")
-                self.pushButton.setMinimumSize(QSize(150, 30))
-                self.pushButton.setFont(font)
-                self.pushButton.setCursor(QCursor(Qt.PointingHandCursor))
-                self.pushButton.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+                self.btn_importFile = QPushButton(self.frame_content_wid_1)
+                self.btn_importFile.setObjectName(u"btn_importFile")
+                self.btn_importFile.setMinimumSize(QSize(150, 30))
+                self.btn_importFile.setFont(font)
+                self.btn_importFile.setCursor(QCursor(Qt.PointingHandCursor))
+                self.btn_importFile.setStyleSheet(u"background-color: rgb(52, 59, 72);")
                 icon4 = QIcon()
                 icon4.addFile(u":/icons/images/icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
-                self.pushButton.setIcon(icon4)
+                self.btn_importFile.setIcon(icon4)
 
-                self.gridLayout.addWidget(self.pushButton, 0, 1, 1, 1)
+                self.gridLayout.addWidget(self.btn_importFile, 0, 1, 1, 1)
 
 
                 self.horizontalLayout_9.addLayout(self.gridLayout)
@@ -1044,16 +1044,16 @@ class Ui_MainWindow(object):
                 self.tableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
                 self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
                 self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
-                self.tableWidget.setSelectionMode(QAbstractItemView.SingleSelection)
-                self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
+                self.tableWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
+                self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
                 self.tableWidget.setShowGrid(True)
                 self.tableWidget.setGridStyle(Qt.SolidLine)
                 self.tableWidget.setSortingEnabled(False)
-                self.tableWidget.horizontalHeader().setVisible(False)
+                self.tableWidget.horizontalHeader().setVisible(True)
                 self.tableWidget.horizontalHeader().setCascadingSectionResizes(True)
                 self.tableWidget.horizontalHeader().setDefaultSectionSize(200)
                 self.tableWidget.horizontalHeader().setStretchLastSection(True)
-                self.tableWidget.verticalHeader().setVisible(False)
+                self.tableWidget.verticalHeader().setVisible(True)
                 self.tableWidget.verticalHeader().setCascadingSectionResizes(False)
                 self.tableWidget.verticalHeader().setHighlightSections(False)
                 self.tableWidget.verticalHeader().setStretchLastSection(True)
@@ -1063,15 +1063,15 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout.addWidget(self.row_3)
 
-                self.AddRowButton = QPushButton(self.widgets)
-                self.AddRowButton.setObjectName(u"AddRowButton")
+                self.btn_addRow = QPushButton(self.widgets)
+                self.btn_addRow.setObjectName(u"btn_addRow")
 
-                self.verticalLayout.addWidget(self.AddRowButton)
+                self.verticalLayout.addWidget(self.btn_addRow)
 
-                self.DeleteRowButton = QPushButton(self.widgets)
-                self.DeleteRowButton.setObjectName(u"DeleteRowButton")
+                self.btn_deleteRow = QPushButton(self.widgets)
+                self.btn_deleteRow.setObjectName(u"btn_deleteRow")
 
-                self.verticalLayout.addWidget(self.DeleteRowButton)
+                self.verticalLayout.addWidget(self.btn_deleteRow)
 
                 self.stackedWidget.addWidget(self.widgets)
                 self.new_page = QWidget()
@@ -1312,7 +1312,7 @@ class Ui_MainWindow(object):
                 self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
                 self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
                 self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
-                self.AddRowButton.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
+                self.btn_addRow.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
                 self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
                 self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Google Earth Graph Creator", None))
         #if QT_CONFIG(tooltip)
@@ -1334,7 +1334,7 @@ class Ui_MainWindow(object):
                 self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"File Name", None))
                 self.lineEdit.setText("")
                 self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
-                self.pushButton.setText(QCoreApplication.translate("MainWindow", u"Open", None))
+                self.btn_importFile.setText(QCoreApplication.translate("MainWindow", u"Open", None))
                 ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
                 ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
                 ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
@@ -1388,8 +1388,8 @@ class Ui_MainWindow(object):
                 ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Value", None));
                 self.tableWidget.setSortingEnabled(__sortingEnabled)
 
-                self.AddRowButton.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
-                self.DeleteRowButton.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
+                self.btn_addRow.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
+                self.btn_deleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
                 self.radioButton.setText(QCoreApplication.translate("MainWindow", u"2D          ", None))
                 self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"3D          ", None))
                 self.label.setText(QCoreApplication.translate("MainWindow", u"Polygon Count  ", None))
