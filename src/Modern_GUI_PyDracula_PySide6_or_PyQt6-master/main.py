@@ -78,6 +78,7 @@ class MainWindow(QMainWindow):
 #        widgets.btn_save.clicked.connect(self.buttonClick)
         widgets.DeleteRowButton.clicked.connect(self.buttonClick)
 #        widgets.btn_save.clicked.connect(self.buttonClick)
+        #TODO: find the import file button and connect it to a function
 
         # EXTRA LEFT BOX
         def openCloseLeftBox():
@@ -145,7 +146,8 @@ class MainWindow(QMainWindow):
             btn.setStyleSheet(UIFunctions.selectMenu(btn.styleSheet())) # SELECT MENU
 
         if btnName == "AddRowButton":
-            widgets.tableWidget.insertRow(widgets.tableWidget.rowCount())
+            row_position = widgets.tableWidget.rowCount()
+            widgets.tableWidget.insertRow(row_position)
 
         if btnName == "DeleteRowButton":
             if widgets.tableWidget.rowCount() > 1:
@@ -161,7 +163,7 @@ class MainWindow(QMainWindow):
             coordinates = []
             outlineIsChecked = False
 
-            def isCellEmpty():
+            def isCellEmpty(): # no clue what None is but it works... i think kinda at least
                 if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
                     return True
                 else:
@@ -182,13 +184,14 @@ class MainWindow(QMainWindow):
             # create coords
             # ///////////////////////////////////////////////////////////////
             
+            # 2D array iteration type beat
             for row in range(1, widgets.tableWidget.rowCount()):
                 for column in range(widgets.tableWidget.columnCount()):
                     if column == 0:
-                        if isCellEmpty(): x = 0.0; y = 0.0
+                        if isCellEmpty(): x = 48.0677873; y = 12.8578328 #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
                         else: x=float(widgets.tableWidget.item(row, column).text())
                     elif column == 1:
-                        if isCellEmpty(): x = 0.0; y = 0.0
+                        if isCellEmpty(): x = 48.0677873; y = 12.8578328
                         else: y=float(widgets.tableWidget.item(row, column).text())
                     elif column == 2:
                         if isCellEmpty(): polygonName = "No-Name"
@@ -204,6 +207,10 @@ class MainWindow(QMainWindow):
             finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
             finalFile.makePolygon()
             finalFile.saveFile()
+        
+        #TODO: create main import file function
+        #TODO: set table size to what the parsed file declares
+        #TODO: set table values to what the parsed file declares
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
@@ -225,7 +232,6 @@ class MainWindow(QMainWindow):
             print('Mouse click: LEFT CLICK')
         if event.buttons() == Qt.RightButton:
             print('Mouse click: RIGHT CLICK')
-            #TODO: test
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
