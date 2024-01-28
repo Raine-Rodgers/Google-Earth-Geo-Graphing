@@ -19,7 +19,8 @@ import os
 import platform
 from BackEnd.polygonMake import *
 import tkinter
-from tkinter import filedialog
+from tkinter import filedialog, messagebox # import responsible for error messaging and file import
+import pickle
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -40,6 +41,7 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
+        app = QApplication(sys.argv)
         global widgets
         widgets = self.ui
         tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
@@ -78,6 +80,7 @@ class MainWindow(QMainWindow):
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_importFile.clicked.connect(self.ImportFileButton)
+        app.aboutToQuit.connect(myExitHandler) # myExitHandler is a callable
         #TODO: find the import file button and connect it to a function
 
         # EXTRA LEFT BOX
@@ -220,18 +223,23 @@ class MainWindow(QMainWindow):
             coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
         if widgets.checkBox.isChecked(): outlineIsChecked = True
-
-        finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
-        finalFile.makePolygon()
-        finalFile.saveFile()
-        
-        if btnName == "import_File":
-            folder_path = filedialog.askdirectory()
-            print(folder_path)
+        if not (widgets.lineEdit.text() is None or widgets.lineEdit.text()==""):
+            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
+            finalFile.makePolygon()
+            finalFile.saveFile()
+        else: messagebox.showerror("Error", "Please enter a file name")
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
-    
-        #TODO: create main import file function
+
+    def myExitHandler(self):
+        tableValuesUnpickled = []
+        for row in range(1, widgets.tableWidget.rowCount()):
+            for column in range(widgets.tableWidget.columnCount()):
+                tableValuesUnpickled.append(widgets.tableWidget.item(row, column).text())
+        tableValuesPickled = pickle.dumps(tableValuesUnpickled)
+        #TODO: save table values to a file when program is closed
+
+
         #TODO: set table size to what the parsed file declares
         #TODO: set table values to what the parsed file declares
 
