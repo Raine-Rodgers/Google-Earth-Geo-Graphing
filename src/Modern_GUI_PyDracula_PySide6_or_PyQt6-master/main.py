@@ -80,7 +80,7 @@ class MainWindow(QMainWindow):
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_importFile.clicked.connect(self.ImportFileButton)
-        app.aboutToQuit.connect(myExitHandler) # myExitHandler is a callable
+        app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
         #TODO: find the import file button and connect it to a function
 
         # EXTRA LEFT BOX
