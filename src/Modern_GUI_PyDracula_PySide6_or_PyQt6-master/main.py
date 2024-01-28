@@ -83,7 +83,6 @@ class MainWindow(QMainWindow):
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_importFile.clicked.connect(self.ImportFileButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
-        #TODO: find the import file button and connect it to a function
 
         # EXTRA LEFT BOX
         def openCloseLeftBox():
@@ -158,7 +157,6 @@ class MainWindow(QMainWindow):
         #TODO: set table size to what the parsed file declares
         #TODO: set all values to what the parsed file declares
         #TODO: set file name to what the parsed file declares
-        #TODO: 
         self.filePath = filedialog.askdirectory()
         print(self.filePath)
 
