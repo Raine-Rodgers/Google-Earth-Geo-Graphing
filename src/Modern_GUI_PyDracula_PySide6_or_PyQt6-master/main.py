@@ -41,7 +41,9 @@ class MainWindow(QMainWindow):
         # ///////////////////////////////////////////////////////////////
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
-        app = QApplication(sys.argv)
+        self.filePath = os.path.expanduser("~/Desktop")
+        if not QApplication.instance(): app = QApplication(sys.argv)
+        else: app = QApplication.instance()
         global widgets
         widgets = self.ui
         tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
@@ -165,8 +167,8 @@ class MainWindow(QMainWindow):
         #TODO: set all values to what the parsed file declares
         #TODO: set file name to what the parsed file declares
         #TODO: 
-        folder_path = filedialog.askdirectory()
-        print(folder_path)
+        filePath = filedialog.askdirectory()
+        print(filePath)
 
     def SaveButton(self):
         # GET BUTTON CLICKED

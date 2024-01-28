@@ -26,19 +26,18 @@ class CreateCoordinates:
 # a class to create polygons and save the file
 # ///////////////////////////////////////////////////////////////
 class MakeFile:
-    def __init__(self, coordObjList, fileName, outlineIsChecked):
+    def __init__(self, coordObjList, fileName, outlineIsChecked, filePath):
+        self.__filePath = filePath
         self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
         self.__fileName = fileName  # name of the file
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
 
-    def saveFile(self):
-        self.__kml.save(self.__fileName + ".kml") # saves file with a name stored in a variable
 
-    
-    
-    
-    
+    def saveFile(self):
+        self.__kml.save(self.__filePath, self.__fileName + ".kml") # saves file with a name stored in a variable
+
+
     def makePolygon(self):
         for i in range(len(self.__coordObjList)): # iterate through the list of coordinate objects
             pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),
