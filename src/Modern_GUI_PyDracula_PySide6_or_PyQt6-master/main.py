@@ -103,15 +103,6 @@ class MainWindow(QMainWindow):
         # SET CUSTOM THEME
         # ///////////////////////////////////////////////////////////////
         useCustomTheme = False
-        # themeFile = "themes\py_dracula_light.qss"
-
-        # SET THEME AND HACKS
-        # if useCustomTheme:
-        #     # LOAD AND APPLY STYLE
-        #     UIFunctions.theme(self, themeFile, True)
-
-        #     # SET HACKS
-        #     AppFunctions.setThemeHack(self)
 
         # SET HOME PAGE AND SELECT MENU
         # ///////////////////////////////////////////////////////////////
@@ -122,6 +113,7 @@ class MainWindow(QMainWindow):
     # BUTTONS CLICK
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////
+
     def HomeButton(self):
         # GET BUTTON CLICKED
         btn = self.sender()
@@ -167,8 +159,8 @@ class MainWindow(QMainWindow):
         #TODO: set all values to what the parsed file declares
         #TODO: set file name to what the parsed file declares
         #TODO: 
-        filePath = filedialog.askdirectory()
-        print(filePath)
+        self.filePath = filedialog.askdirectory()
+        print(self.filePath)
 
     def SaveButton(self):
         # GET BUTTON CLICKED
@@ -183,7 +175,6 @@ class MainWindow(QMainWindow):
         value = float(0)
         coordinates = []
         outlineIsChecked = False
-        print(f'Button "{btnName}" pressed!')
 
         def isCellEmpty(): # no clue what None is but it works... i think kinda at least
             if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
@@ -225,14 +216,21 @@ class MainWindow(QMainWindow):
             coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
         if widgets.checkBox.isChecked(): outlineIsChecked = True
-        if not (widgets.lineEdit.text() is None or widgets.lineEdit.text()==""):
-            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked)
+        if self.exeptionHandler("NameLess"):
+            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
-        else: messagebox.showerror("Error", "Please enter a file name")
+        
         # PRINT BTN NAME
         print(f'Button "{btnName}" pressed!')
 
+    def exeptionHandler(self, type):
+        if type == "NameLess":
+            if not (widgets.lineEdit.text() is None or widgets.lineEdit.text()==""):
+                return True
+            else: messagebox.showerror("Error", "Please enter a file name")
+#        elif type == "NoSave":
+        else: return False
     def myExitHandler(self):
         tableValuesUnpickled = []
         for row in range(1, widgets.tableWidget.rowCount()):

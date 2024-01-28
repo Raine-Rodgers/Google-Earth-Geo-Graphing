@@ -35,7 +35,7 @@ class MakeFile:
 
 
     def saveFile(self):
-        self.__kml.save(self.__filePath, self.__fileName + ".kml") # saves file with a name stored in a variable
+        self.__kml.save(self.__filePath + "/" + self.__fileName + ".kml") # saves file with a name stored in a variable
 
 
     def makePolygon(self):
