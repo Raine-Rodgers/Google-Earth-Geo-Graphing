@@ -175,7 +175,7 @@ class MainWindow(QMainWindow):
         outlineIsChecked = False
 
         def isCellEmpty(): # no clue what None is but it works... i think kinda at least
-            if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
+            if widgets.tableWidget.item(row, column) is None or widgets.tableWidget.item(row, column).text() == "":
                 return True
             else:
                 return False
@@ -199,16 +199,16 @@ class MainWindow(QMainWindow):
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 if column == 0:
-                    if isCellEmpty(): x = 48.0677873; y = 12.8578328 #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
+                    if isCellEmpty(): x = 0; y = 0; print(f"empty at {row, column}") #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
                     else: x=float(widgets.tableWidget.item(row, column).text())
                 elif column == 1:
-                    if isCellEmpty(): x = 48.0677873; y = 12.8578328
+                    if isCellEmpty(): x = 0; y = 0; print(f"empty at {row, column}")
                     else: y=float(widgets.tableWidget.item(row, column).text())
                 elif column == 2:
-                    if isCellEmpty(): polygonName = "No-Name"
+                    if isCellEmpty(): polygonName = "No-Name"; print(f"empty at {row, column}")
                     else: polygonName=widgets.tableWidget.item(row, column).text()
                 elif column == 3:
-                    if not isCellEmpty(): value=float(widgets.tableWidget.item(row, column).text())
+                    if isCellEmpty() == False: value=float(widgets.tableWidget.item(row, column).text()); print(f"empty at {row, column}")
                     elif CheckLineEdit5Empty(): value = 0
                     else: CheckConstantHeight()
             coordinates.append(CreateCoordinates(x, y, value, polygonName))

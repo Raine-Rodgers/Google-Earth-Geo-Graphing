@@ -1,3 +1,4 @@
+import colorsys
 import simplekml
 from pykml import parser
 #TODO: use pykml to parse file and get coordinates
@@ -33,6 +34,14 @@ class MakeFile:
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
 
+    def convertToHex(self, color):
+        # Convert color value to RGB
+        r, g, b = colorsys.hsv_to_rgb(color / 360, 1, 1)
+        
+        # Convert RGB to hex code
+        hex_code = '#%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
+        
+        return hex_code
 
     def saveFile(self):
         self.__kml.save(self.__filePath + "/" + self.__fileName + ".kml") # saves file with a name stored in a variable
@@ -48,7 +57,7 @@ class MakeFile:
             print(self.__coordObjList[i])
             pol.extrude = 1 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
-            pol.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.green) # set color of polygonw
+            pol.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.green) # set color of polygonw // self.convertToHex(1)
             if self.__outlineIsChecked: pol.style.polystyle.outline = 1
             else: pol.style.polystyle.outline = 0
             pol.style.polystyle.fill = 1 # set fill of polygon
