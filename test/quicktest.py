@@ -7,7 +7,7 @@ def convertToHex(color):
     r, g, b = colorsys.hsv_to_rgb(color / 360, 1, 1)
     
     # Convert RGB to hex code
-    hex_code = '#%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
+    hex_code = 'ff%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
     
     return hex_code
 
@@ -19,16 +19,8 @@ def generateHexCode(number):
     r, g, b = colorsys.hsv_to_rgb(hue / 360, 1, 1)
     
     # Convert RGB to hex code
-    hex_code = '#%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
+    hex_code = 'ff%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
     
     return hex_code
 
-step = 0
-for i in range(0, 20):
-
-    print(f"convert: {convertToHex(step)}")
-    step += 10
-step = 0
-for i in range(0, 20):
-    print(f"generate: {generateHexCode(step)}")
-    step += 10
+print(f"convert: {convertToHex(1)}")
