@@ -14,7 +14,7 @@ def convertToHex(color):
 def generateHexCode(number):
     # Calculate the hue value based on the given number
     hue = (number / 100) * 240  # Adjust the range of the number to fit between 0 and 240
-    
+	
     # Convert hue value to RGB
     r, g, b = colorsys.hsv_to_rgb(hue / 360, 1, 1)
     
