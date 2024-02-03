@@ -1177,10 +1177,10 @@ class Ui_MainWindow(object):
 
                 self.horizontalLayout_10.addWidget(self.Radio_Color_AccordingToValue)
 
-                self.Radio_Color_AccordingToConst = QRadioButton(self.groupBox_5)
-                self.Radio_Color_AccordingToConst.setObjectName(u"Radio_Color_AccordingToConst")
+                self.Radio_Color_AccordingToConstent = QRadioButton(self.groupBox_5)
+                self.Radio_Color_AccordingToConstent.setObjectName(u"Radio_Color_AccordingToConstent")
 
-                self.horizontalLayout_10.addWidget(self.Radio_Color_AccordingToConst)
+                self.horizontalLayout_10.addWidget(self.Radio_Color_AccordingToConstent)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_5, 2, 0, 1, 1)
@@ -1407,7 +1407,7 @@ class Ui_MainWindow(object):
                 self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
                 self.Radio_Color_AccordingToValue.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
-                self.Radio_Color_AccordingToConst.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
+                self.Radio_Color_AccordingToConstent.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
                 self.checkBox_Outline.setText(QCoreApplication.translate("MainWindow", u"Outline", None))
                 self.label_Color_SelectCol.setText(QCoreApplication.translate("MainWindow", u"Select Color", None))

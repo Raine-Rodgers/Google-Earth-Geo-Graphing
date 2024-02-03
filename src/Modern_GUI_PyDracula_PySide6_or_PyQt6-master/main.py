@@ -201,27 +201,39 @@ class MainWindow(QMainWindow):
         outlineIsChecked = False
         color = ""
 
-        if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
+        if not(widgets.lineEdit_Height_Factor.text() is None or widgets.lineEdit_Height_Factor.text() ==""):
+            if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
 
         def isCellEmpty(rowCheck, columnCheck):
             if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
                 return True
             else:
                 return False
-            
+        
+        def formatHex():
+            if "#" in self.color:
+                self.color = self.color.replace("#", "")
+            self.color[::-1]
+            print(f'formated hex: {self.color}')
+            self.color = "ff" + self.color
+
         def choseColor():
             if(widgets.comboBox_Color.currentIndex() == 0):
-                # if hexcode is empty, set color to black
-                if(widgets.lineEdit_Color_HexCode.text() == "" or widgets.lineEdit_Color_HexCode is None): color = "Black"
-            elif(widgets.comboBox_Color.currentIndex() == 1): color = "Red"
-            elif(widgets.comboBox_Color.currentIndex() == 2): color = "Green"
-            elif(widgets.comboBox_Color.currentIndex() == 3): color = "Blue"
-            elif(widgets.comboBox_Color.currentIndex() == 4): color = "Pink"
-            elif(widgets.comboBox_Color.currentIndex() == 5): color = "Lime"
-            elif(widgets.comboBox_Color.currentIndex() == 6): color = "Black"
+                if(widgets.lineEdit_Color_HexCode.text() == "" or widgets.lineEdit_Color_HexCode is None): self.color = "ffff0000" # if hexcode is empty, set color to blue
+                else:
+                    if self.exeptionHandler("InvalidHex"):
+                        self.color = widgets.lineEdit_Color_HexCode.text()
+                        print(f'unformated hex: {self.color}')
+                        formatHex()
+            elif(widgets.comboBox_Color.currentIndex() == 1): self.color = "ff0000ff"
+            elif(widgets.comboBox_Color.currentIndex() == 2): self.color = "ff00ff00"
+            elif(widgets.comboBox_Color.currentIndex() == 3): self.color = "ffff0000"
+            elif(widgets.comboBox_Color.currentIndex() == 4): self.color = "ffff00ff"
+            elif(widgets.comboBox_Color.currentIndex() == 5): self.color = "ff32CD32"
+            elif(widgets.comboBox_Color.currentIndex() == 6): self.color = "ff000000"
         # create coords
         # ///////////////////////////////////////////////////////////////
-        
+
         # 2D array iteration type beat
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
@@ -245,7 +257,10 @@ class MainWindow(QMainWindow):
 
         if widgets.checkBox_Outline.isChecked(): outlineIsChecked = True
         if self.exeptionHandler("NameLess"):
-            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.filePath)
+            if widgets.Radio_Color_AccordingToConstent.isChecked():
+                choseColor()
+            else: color = "Na"
+            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, color, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         
@@ -257,7 +272,11 @@ class MainWindow(QMainWindow):
             if not (widgets.lineEdit_FileName.text() is None or widgets.lineEdit_FileName.text()==""):
                 return True
             else: messagebox.showerror("Error", "Please enter a file name")
-#        elif type == "NoSave":
+
+        elif type == "InvalidHex":
+            if len(widgets.lineEdit_Color_HexCode.text()) == 6:
+                return True
+            else: messagebox.showerror("Error", "Please enter a valid hex code")
         else: return False
 
     def myExitHandler(self):

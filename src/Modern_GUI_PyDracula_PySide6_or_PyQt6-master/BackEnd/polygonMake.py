@@ -27,12 +27,13 @@ class CreateCoordinates:
 # a class to create polygons and save the file
 # ///////////////////////////////////////////////////////////////
 class MakeFile:
-    def __init__(self, coordObjList, fileName, outlineIsChecked, filePath):
+    def __init__(self, coordObjList, fileName, outlineIsChecked, barColor, filePath):
         self.__filePath = filePath
         self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
         self.__fileName = fileName  # name of the file
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
+        self.__barColor = barColor # color of the bar graph
 
     def convertToHex(self, color):
         # Convert color value to RGB
@@ -60,7 +61,10 @@ class MakeFile:
             print(self.__coordObjList[i])
             pol.extrude = 1 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
-            pol.style.polystyle.color = self.convertToHex(1)#simplekml.Color.changealphaint(200, simplekml.Color.) # set color of polygonw // 
+            if self.__barColor == "Na":
+                pol.style.polystyle.color = self.convertToHex(self.__coordObjList[i].getZ())#simplekml.Color.changealphaint(200, simplekml.Color.) # set color of polygonw // 
+            else:
+                pol.style.polystyle.color = self.__barColor
             if self.__outlineIsChecked: pol.style.polystyle.outline = 1
             else: pol.style.polystyle.outline = 0
             pol.style.polystyle.fill = 1 # set fill of polygon
