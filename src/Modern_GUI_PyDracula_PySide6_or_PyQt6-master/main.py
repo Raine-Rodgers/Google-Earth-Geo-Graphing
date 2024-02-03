@@ -99,7 +99,7 @@ class MainWindow(QMainWindow):
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
         widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
-#        widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
+        # widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
 
         # EXTRA RIGHT BOX
         def openCloseRightBox():
@@ -199,14 +199,26 @@ class MainWindow(QMainWindow):
         heightFactor = float(1)
         coordinates = []
         outlineIsChecked = False
+        color = ""
 
         if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
 
-        def isCellEmpty(rowCheck, columnCheck): # no clue what None is but it works... i think kinda at least
+        def isCellEmpty(rowCheck, columnCheck):
             if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
                 return True
             else:
                 return False
+            
+        def choseColor():
+            if(widgets.comboBox_Color.currentIndex() == 0):
+                # if hexcode is empty, set color to black
+                if(widgets.lineEdit_Color_HexCode.text() == "" or widgets.lineEdit_Color_HexCode is None): color = "Black"
+            elif(widgets.comboBox_Color.currentIndex() == 1): color = "Red"
+            elif(widgets.comboBox_Color.currentIndex() == 2): color = "Green"
+            elif(widgets.comboBox_Color.currentIndex() == 3): color = "Blue"
+            elif(widgets.comboBox_Color.currentIndex() == 4): color = "Pink"
+            elif(widgets.comboBox_Color.currentIndex() == 5): color = "Lime"
+            elif(widgets.comboBox_Color.currentIndex() == 6): color = "Black"
         # create coords
         # ///////////////////////////////////////////////////////////////
         
