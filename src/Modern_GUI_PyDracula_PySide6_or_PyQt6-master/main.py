@@ -250,7 +250,7 @@ class MainWindow(QMainWindow):
                 elif column == 3:
                     if isCellEmpty(row, column)==False and widgets.Radio_Height_AccordingToConstent.isChecked()==False: # and widgets.Radio_Height_AccordingToValue.isChecked()==False
                         value=float(widgets.tableWidget.item(row, column).text())
-                    elif widgets.Radio_Height_AccordingToConstent.isChecked():
+                    elif widgets.Radio_Height_AccordingToConstent.isChecked() and widgets.lineEdit_Height_SetConst.text() != "":
                         value=float(widgets.lineEdit_Height_SetConst.text())
                     else: value = 0
                     value *= heightFactor

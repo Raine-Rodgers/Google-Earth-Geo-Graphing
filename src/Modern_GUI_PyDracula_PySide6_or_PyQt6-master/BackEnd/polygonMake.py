@@ -43,6 +43,8 @@ class MakeFile:
     def convertToHex(self, color):
         
         # Normalize the color value between 0 and 1
+        if self.min == self.max:
+            return 'ffff0000'
         normalized_color = (color - self.min) / (self.max - self.min)
         
         # Reverse the normalized color value
