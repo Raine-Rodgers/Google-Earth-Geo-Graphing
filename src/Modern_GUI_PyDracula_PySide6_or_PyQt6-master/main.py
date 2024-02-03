@@ -47,6 +47,16 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
+        save_file = "save.p"
+        if os.path.isfile(save_file) and os.path.getsize(save_file) > 0:
+            temp = pickle.load(open(save_file, "rb"))
+            tempRow = 1
+            while len(temp) > 0:
+                tempRow += 1
+                for column in range(widgets.tableWidget.columnCount()):
+                    if tempRow > widgets.tableWidget.rowCount():
+                        widgets.tableWidget.insertRow(tempRow-1)
+                    widgets.tableWidget.setItem(tempRow-1, column, QTableWidgetItem(temp.pop(0)))
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
@@ -141,6 +151,10 @@ class MainWindow(QMainWindow):
 
             row_position = widgets.tableWidget.rowCount()
             widgets.tableWidget.insertRow(row_position)
+            widgets.tableWidget.setItem(row_position+1, 0, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 1, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 2, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 3, QTableWidgetItem(" "))
             print(f'Button "{btnName}" pressed!')
 
     def DeleteRowButton(self):
@@ -222,12 +236,15 @@ class MainWindow(QMainWindow):
             else: messagebox.showerror("Error", "Please enter a file name")
 #        elif type == "NoSave":
         else: return False
+
     def myExitHandler(self):
-        tableValuesUnpickled = []
+        pickledArray = []
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
-                tableValuesUnpickled.append(widgets.tableWidget.item(row, column).text())
-        tableValuesPickled = pickle.dumps(tableValuesUnpickled)
+                print(row, column)
+                if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
+                else: pickledArray.append(widgets.tableWidget.item(row, column).text())
+        pickle.dump( pickledArray, open( "save.p", "wb" ))
         #TODO: save table values to a file when program is closed
 
 
