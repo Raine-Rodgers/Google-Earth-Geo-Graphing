@@ -1,35 +1,18 @@
-# -*- coding: utf-8 -*-
 
-################################################################################
-## Form generated from reading UI file 'maingnxZcz.ui'
-##
-## Created by: Qt User Interface Compiler version 6.0.2
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
 
-from PySide6.QtCore import *
-from PySide6.QtGui import *
-from PySide6.QtWidgets import *
-from . resources_rc import *
 
-#TODO: change default name for buttons cuz that shits a mess rn frfr
 
-class Ui_MainWindow(object):
-        def setupUi(self, MainWindow):
-                if not MainWindow.objectName():
-                        MainWindow.setObjectName(u"MainWindow")
-                MainWindow.resize(1280, 720)
-                MainWindow.setMinimumSize(QSize(940, 560))
-                self.styleSheet = QWidget(MainWindow)
-                self.styleSheet.setObjectName(u"styleSheet")
-                font = QFont()
-                font.setFamily(u"Segoe UI")
-                font.setPointSize(10)
-                font.setBold(False)
-                font.setItalic(False)
-                self.styleSheet.setFont(font)
-                self.styleSheet.setStyleSheet(u"/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
+
+
+
+
+
+
+
+
+
+#///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                        u"/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
 "\n"
 "SET APP STYLESHEET - FULL STYLES HERE\n"
 "DARK THEME - DRACULA COLOR BASED\n"
@@ -636,17 +619,17 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout_8.addWidget(self.btn_home)
 
-                self.btn_edit = QPushButton(self.topMenu)
-                self.btn_edit.setObjectName(u"btn_edit")
-                sizePolicy.setHeightForWidth(self.btn_edit.sizePolicy().hasHeightForWidth())
-                self.btn_edit.setSizePolicy(sizePolicy)
-                self.btn_edit.setMinimumSize(QSize(0, 45))
-                self.btn_edit.setFont(font)
-                self.btn_edit.setCursor(QCursor(Qt.PointingHandCursor))
-                self.btn_edit.setLayoutDirection(Qt.LeftToRight)
-                self.btn_edit.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-pencil.png);")
+                self.btn_new = QPushButton(self.topMenu)
+                self.btn_new.setObjectName(u"btn_new")
+                sizePolicy.setHeightForWidth(self.btn_new.sizePolicy().hasHeightForWidth())
+                self.btn_new.setSizePolicy(sizePolicy)
+                self.btn_new.setMinimumSize(QSize(0, 45))
+                self.btn_new.setFont(font)
+                self.btn_new.setCursor(QCursor(Qt.PointingHandCursor))
+                self.btn_new.setLayoutDirection(Qt.LeftToRight)
+                self.btn_new.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-pencil.png);")
 
-                self.verticalLayout_8.addWidget(self.btn_edit)
+                self.verticalLayout_8.addWidget(self.btn_new)
 
                 self.btn_save = QPushButton(self.topMenu)
                 self.btn_save.setObjectName(u"btn_save")
@@ -890,24 +873,24 @@ class Ui_MainWindow(object):
                 self.gridLayout = QGridLayout()
                 self.gridLayout.setObjectName(u"gridLayout")
                 self.gridLayout.setContentsMargins(-1, -1, -1, 0)
-                self.lineEdit_FileName = QLineEdit(self.frame_content_wid_1)
-                self.lineEdit_FileName.setObjectName(u"lineEdit_FileName")
-                self.lineEdit_FileName.setMinimumSize(QSize(0, 30))
-                self.lineEdit_FileName.setStyleSheet(u"background-color: rgb(33, 37, 43);")
+                self.lineEdit = QLineEdit(self.frame_content_wid_1)
+                self.lineEdit.setObjectName(u"lineEdit")
+                self.lineEdit.setMinimumSize(QSize(0, 30))
+                self.lineEdit.setStyleSheet(u"background-color: rgb(33, 37, 43);")
 
-                self.gridLayout.addWidget(self.lineEdit_FileName, 0, 0, 1, 1)
+                self.gridLayout.addWidget(self.lineEdit, 0, 0, 1, 1)
 
-                self.btn_ChoseDir = QPushButton(self.frame_content_wid_1)
-                self.btn_ChoseDir.setObjectName(u"btn_ChoseDir")
-                self.btn_ChoseDir.setMinimumSize(QSize(150, 30))
-                self.btn_ChoseDir.setFont(font)
-                self.btn_ChoseDir.setCursor(QCursor(Qt.PointingHandCursor))
-                self.btn_ChoseDir.setStyleSheet(u"background-color: rgb(52, 59, 72);")
+                self.btn_importFile = QPushButton(self.frame_content_wid_1)
+                self.btn_importFile.setObjectName(u"btn_importFile")
+                self.btn_importFile.setMinimumSize(QSize(150, 30))
+                self.btn_importFile.setFont(font)
+                self.btn_importFile.setCursor(QCursor(Qt.PointingHandCursor))
+                self.btn_importFile.setStyleSheet(u"background-color: rgb(52, 59, 72);")
                 icon4 = QIcon()
                 icon4.addFile(u":/icons/images/icons/cil-folder-open.png", QSize(), QIcon.Normal, QIcon.Off)
-                self.btn_ChoseDir.setIcon(icon4)
+                self.btn_importFile.setIcon(icon4)
 
-                self.gridLayout.addWidget(self.btn_ChoseDir, 0, 1, 1, 1)
+                self.gridLayout.addWidget(self.btn_importFile, 0, 1, 1, 1)
 
 
                 self.horizontalLayout_9.addLayout(self.gridLayout)
@@ -1045,7 +1028,7 @@ class Ui_MainWindow(object):
                 self.tableWidget.setSizeAdjustPolicy(QAbstractScrollArea.AdjustToContents)
                 self.tableWidget.setEditTriggers(QAbstractItemView.AllEditTriggers)
                 self.tableWidget.setSelectionMode(QAbstractItemView.ExtendedSelection)
-                self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectRows)
+                self.tableWidget.setSelectionBehavior(QAbstractItemView.SelectItems)
                 self.tableWidget.setShowGrid(True)
                 self.tableWidget.setGridStyle(Qt.SolidLine)
                 self.tableWidget.setSortingEnabled(False)
@@ -1073,11 +1056,6 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout.addWidget(self.btn_deleteRow)
 
-                self.btn_deleteSelected = QPushButton(self.widgets)
-                self.btn_deleteSelected.setObjectName(u"btn_deleteSelected")
-
-                self.verticalLayout.addWidget(self.btn_deleteSelected)
-
                 self.stackedWidget.addWidget(self.widgets)
                 self.new_page = QWidget()
                 self.new_page.setObjectName(u"new_page")
@@ -1086,6 +1064,40 @@ class Ui_MainWindow(object):
                 self.verticalLayout_5 = QVBoxLayout()
                 self.verticalLayout_5.setSpacing(0)
                 self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+                self.horizontalLayout_6 = QHBoxLayout()
+                self.horizontalLayout_6.setSpacing(0)
+                self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
+                self.horizontalLayout_6.setContentsMargins(-1, -1, 300, -1)
+                self.radioButton = QRadioButton(self.new_page)
+                self.radioButton.setObjectName(u"radioButton")
+                self.radioButton.setIconSize(QSize(16, 20))
+
+                self.horizontalLayout_6.addWidget(self.radioButton)
+
+                self.radioButton_2 = QRadioButton(self.new_page)
+                self.radioButton_2.setObjectName(u"radioButton_2")
+
+                self.horizontalLayout_6.addWidget(self.radioButton_2)
+
+                self.label = QLabel(self.new_page)
+                self.label.setObjectName(u"label")
+
+                self.horizontalLayout_6.addWidget(self.label)
+
+                self.spinBox = QSpinBox(self.new_page)
+                self.spinBox.setObjectName(u"spinBox")
+
+                self.horizontalLayout_6.addWidget(self.spinBox)
+
+                self.formLayout = QFormLayout()
+                self.formLayout.setObjectName(u"formLayout")
+                self.formLayout.setContentsMargins(-1, -1, 0, -1)
+
+                self.horizontalLayout_6.addLayout(self.formLayout)
+
+
+                self.verticalLayout_5.addLayout(self.horizontalLayout_6)
+
                 self.gridLayout_2 = QGridLayout()
                 self.gridLayout_2.setObjectName(u"gridLayout_2")
                 self.groupBox_2 = QGroupBox(self.new_page)
@@ -1111,25 +1123,25 @@ class Ui_MainWindow(object):
                 self.groupBox_4.setObjectName(u"groupBox_4")
                 self.horizontalLayout_13 = QHBoxLayout(self.groupBox_4)
                 self.horizontalLayout_13.setObjectName(u"horizontalLayout_13")
-                self.label_Height_Factor = QLabel(self.groupBox_4)
-                self.label_Height_Factor.setObjectName(u"label_Height_Factor")
+                self.label_4 = QLabel(self.groupBox_4)
+                self.label_4.setObjectName(u"label_4")
 
-                self.horizontalLayout_13.addWidget(self.label_Height_Factor)
+                self.horizontalLayout_13.addWidget(self.label_4)
 
-                self.lineEdit_Height_Factor = QLineEdit(self.groupBox_4)
-                self.lineEdit_Height_Factor.setObjectName(u"lineEdit_Height_Factor")
+                self.lineEdit_4 = QLineEdit(self.groupBox_4)
+                self.lineEdit_4.setObjectName(u"lineEdit_4")
 
-                self.horizontalLayout_13.addWidget(self.lineEdit_Height_Factor)
+                self.horizontalLayout_13.addWidget(self.lineEdit_4)
 
-                self.label_Height_SetConst = QLabel(self.groupBox_4)
-                self.label_Height_SetConst.setObjectName(u"label_Height_SetConst")
+                self.label_5 = QLabel(self.groupBox_4)
+                self.label_5.setObjectName(u"label_5")
 
-                self.horizontalLayout_13.addWidget(self.label_Height_SetConst)
+                self.horizontalLayout_13.addWidget(self.label_5)
 
-                self.lineEdit_Height_SetConst = QLineEdit(self.groupBox_4)
-                self.lineEdit_Height_SetConst.setObjectName(u"lineEdit_Height_SetConst")
+                self.lineEdit_5 = QLineEdit(self.groupBox_4)
+                self.lineEdit_5.setObjectName(u"lineEdit_5")
 
-                self.horizontalLayout_13.addWidget(self.lineEdit_Height_SetConst)
+                self.horizontalLayout_13.addWidget(self.lineEdit_5)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_4, 1, 1, 1, 1)
@@ -1138,15 +1150,15 @@ class Ui_MainWindow(object):
                 self.groupBox_3.setObjectName(u"groupBox_3")
                 self.horizontalLayout_8 = QHBoxLayout(self.groupBox_3)
                 self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-                self.Radio_Height_AccordingToValue = QRadioButton(self.groupBox_3)
-                self.Radio_Height_AccordingToValue.setObjectName(u"Radio_Height_AccordingToValue")
+                self.radioButton_5 = QRadioButton(self.groupBox_3)
+                self.radioButton_5.setObjectName(u"radioButton_5")
 
-                self.horizontalLayout_8.addWidget(self.Radio_Height_AccordingToValue)
+                self.horizontalLayout_8.addWidget(self.radioButton_5)
 
-                self.Radio_Height_AccordingToConstent = QRadioButton(self.groupBox_3)
-                self.Radio_Height_AccordingToConstent.setObjectName(u"Radio_Height_AccordingToConstent")
+                self.radioButton_6 = QRadioButton(self.groupBox_3)
+                self.radioButton_6.setObjectName(u"radioButton_6")
 
-                self.horizontalLayout_8.addWidget(self.Radio_Height_AccordingToConstent)
+                self.horizontalLayout_8.addWidget(self.radioButton_6)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_3, 1, 0, 1, 1)
@@ -1172,15 +1184,15 @@ class Ui_MainWindow(object):
                 self.groupBox_5.setObjectName(u"groupBox_5")
                 self.horizontalLayout_10 = QHBoxLayout(self.groupBox_5)
                 self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
-                self.Radio_Color_AccordingToValue = QRadioButton(self.groupBox_5)
-                self.Radio_Color_AccordingToValue.setObjectName(u"Radio_Color_AccordingToValue")
+                self.radioButton_7 = QRadioButton(self.groupBox_5)
+                self.radioButton_7.setObjectName(u"radioButton_7")
 
-                self.horizontalLayout_10.addWidget(self.Radio_Color_AccordingToValue)
+                self.horizontalLayout_10.addWidget(self.radioButton_7)
 
-                self.Radio_Color_AccordingToConst = QRadioButton(self.groupBox_5)
-                self.Radio_Color_AccordingToConst.setObjectName(u"Radio_Color_AccordingToConst")
+                self.radioButton_8 = QRadioButton(self.groupBox_5)
+                self.radioButton_8.setObjectName(u"radioButton_8")
 
-                self.horizontalLayout_10.addWidget(self.Radio_Color_AccordingToConst)
+                self.horizontalLayout_10.addWidget(self.radioButton_8)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_5, 2, 0, 1, 1)
@@ -1189,48 +1201,15 @@ class Ui_MainWindow(object):
                 self.groupBox_6.setObjectName(u"groupBox_6")
                 self.horizontalLayout_14 = QHBoxLayout(self.groupBox_6)
                 self.horizontalLayout_14.setObjectName(u"horizontalLayout_14")
-                self.checkBox_Outline = QCheckBox(self.groupBox_6)
-                self.checkBox_Outline.setObjectName(u"checkBox_Outline")
-                sizePolicy.setHeightForWidth(self.checkBox_Outline.sizePolicy().hasHeightForWidth())
-                self.checkBox_Outline.setSizePolicy(sizePolicy)
+                self.checkBox = QCheckBox(self.groupBox_6)
+                self.checkBox.setObjectName(u"checkBox")
 
-                self.horizontalLayout_14.addWidget(self.checkBox_Outline)
+                self.horizontalLayout_14.addWidget(self.checkBox)
 
-                self.label_Color_SelectCol = QLabel(self.groupBox_6)
-                self.label_Color_SelectCol.setObjectName(u"label_Color_SelectCol")
-                sizePolicy4 = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Preferred)
-                sizePolicy4.setHorizontalStretch(0)
-                sizePolicy4.setVerticalStretch(0)
-                sizePolicy4.setHeightForWidth(self.label_Color_SelectCol.sizePolicy().hasHeightForWidth())
-                self.label_Color_SelectCol.setSizePolicy(sizePolicy4)
+                self.label_6 = QLabel(self.groupBox_6)
+                self.label_6.setObjectName(u"label_6")
 
-                self.horizontalLayout_14.addWidget(self.label_Color_SelectCol)
-
-                self.comboBox_Color = QComboBox(self.groupBox_6)
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.addItem("")
-                self.comboBox_Color.setObjectName(u"comboBox_Color")
-                sizePolicy.setHeightForWidth(self.comboBox_Color.sizePolicy().hasHeightForWidth())
-                self.comboBox_Color.setSizePolicy(sizePolicy)
-
-                self.horizontalLayout_14.addWidget(self.comboBox_Color)
-
-                self.label_Color_HexCode = QLabel(self.groupBox_6)
-                self.label_Color_HexCode.setObjectName(u"label_Color_HexCode")
-
-                self.horizontalLayout_14.addWidget(self.label_Color_HexCode)
-
-                self.lineEdit_Color_HexCode = QLineEdit(self.groupBox_6)
-                self.lineEdit_Color_HexCode.setObjectName(u"lineEdit_Color_HexCode")
-                sizePolicy.setHeightForWidth(self.lineEdit_Color_HexCode.sizePolicy().hasHeightForWidth())
-                self.lineEdit_Color_HexCode.setSizePolicy(sizePolicy)
-
-                self.horizontalLayout_14.addWidget(self.lineEdit_Color_HexCode)
+                self.horizontalLayout_14.addWidget(self.label_6)
 
 
                 self.gridLayout_2.addWidget(self.groupBox_6, 2, 1, 1, 1)
@@ -1304,7 +1283,7 @@ class Ui_MainWindow(object):
 
                 self.retranslateUi(MainWindow)
 
-                self.stackedWidget.setCurrentIndex(2)
+                self.stackedWidget.setCurrentIndex(1)
 
 
                 QMetaObject.connectSlotsByName(MainWindow)
@@ -1314,8 +1293,9 @@ class Ui_MainWindow(object):
                 MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
                 self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
                 self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
-                self.btn_edit.setText(QCoreApplication.translate("MainWindow", u"New", None))
+                self.btn_new.setText(QCoreApplication.translate("MainWindow", u"New", None))
                 self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+                self.btn_addRow.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
                 self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
                 self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Google Earth Graph Creator", None))
         #if QT_CONFIG(tooltip)
@@ -1335,9 +1315,9 @@ class Ui_MainWindow(object):
         #endif // QT_CONFIG(tooltip)
                 self.closeAppBtn.setText("")
                 self.labelBoxBlenderInstalation.setText(QCoreApplication.translate("MainWindow", u"File Name", None))
-                self.lineEdit_FileName.setText("")
-                self.lineEdit_FileName.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
-                self.btn_ChoseDir.setText(QCoreApplication.translate("MainWindow", u"Open", None))
+                self.lineEdit.setText("")
+                self.lineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Type here", None))
+                self.btn_importFile.setText(QCoreApplication.translate("MainWindow", u"Open", None))
                 ___qtablewidgetitem = self.tableWidget.horizontalHeaderItem(0)
                 ___qtablewidgetitem.setText(QCoreApplication.translate("MainWindow", u"0", None));
                 ___qtablewidgetitem1 = self.tableWidget.horizontalHeaderItem(1)
@@ -1354,71 +1334,72 @@ class Ui_MainWindow(object):
                 ___qtablewidgetitem6.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
                 ___qtablewidgetitem7 = self.tableWidget.verticalHeaderItem(3)
                 ___qtablewidgetitem7.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
-                ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
-                ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
-                ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
-                ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
-                ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(9)
-                ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(10)
-                ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(11)
-                ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
-                ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(13)
-                ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(14)
-                ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
-                ___qtablewidgetitem19 = self.tableWidget.verticalHeaderItem(15)
-                ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem8 = self.tableWidget.verticalHeaderItem(4)
+                # ___qtablewidgetitem8.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem9 = self.tableWidget.verticalHeaderItem(5)
+                # ___qtablewidgetitem9.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem10 = self.tableWidget.verticalHeaderItem(6)
+                # ___qtablewidgetitem10.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem11 = self.tableWidget.verticalHeaderItem(7)
+                # ___qtablewidgetitem11.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem12 = self.tableWidget.verticalHeaderItem(8)
+                # ___qtablewidgetitem12.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem13 = self.tableWidget.verticalHeaderItem(9)
+                # ___qtablewidgetitem13.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem14 = self.tableWidget.verticalHeaderItem(10)
+                # ___qtablewidgetitem14.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem15 = self.tableWidget.verticalHeaderItem(11)
+                # ___qtablewidgetitem15.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem16 = self.tableWidget.verticalHeaderItem(12)
+                # ___qtablewidgetitem16.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem17 = self.tableWidget.verticalHeaderItem(13)
+                # ___qtablewidgetitem17.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem18 = self.tableWidget.verticalHeaderItem(14)
+                # ___qtablewidgetitem18.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
+                # ___qtablewidgetitem19 = self.tableWidget.verticalHeaderItem(15)
+                # ___qtablewidgetitem19.setText(QCoreApplication.translate("MainWindow", u"New Row", None));
 
                 __sortingEnabled = self.tableWidget.isSortingEnabled()
                 self.tableWidget.setSortingEnabled(False)
                 ___qtablewidgetitem20 = self.tableWidget.item(0, 0)
-                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Test", None));
+                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Latitude", None));
                 ___qtablewidgetitem21 = self.tableWidget.item(0, 1)
-                ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Text", None));
+                ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Longitude", None));
                 ___qtablewidgetitem22 = self.tableWidget.item(0, 2)
-                ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Cell", None));
+                ___qtablewidgetitem22.setText(QCoreApplication.translate("MainWindow", u"Name", None));
                 ___qtablewidgetitem23 = self.tableWidget.item(0, 3)
-                ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Line", None));
+                ___qtablewidgetitem23.setText(QCoreApplication.translate("MainWindow", u"Value", None));
                 self.tableWidget.setSortingEnabled(__sortingEnabled)
 
                 self.btn_addRow.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
                 self.btn_deleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
-                self.btn_deleteSelected.setText(QCoreApplication.translate("MainWindow", u"Delete Selected Rows", None))
+                self.radioButton.setText(QCoreApplication.translate("MainWindow", u"2D          ", None))
+                self.radioButton_2.setText(QCoreApplication.translate("MainWindow", u"3D          ", None))
+                self.label.setText(QCoreApplication.translate("MainWindow", u"Polygon Count  ", None))
                 self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
                 self.label_2.setText(QCoreApplication.translate("MainWindow", u"Size", None))
                 self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
-                self.label_Height_Factor.setText(QCoreApplication.translate("MainWindow", u"Factor", None))
-                self.label_Height_SetConst.setText(QCoreApplication.translate("MainWindow", u"          Set Const Height", None))
+                self.label_4.setText(QCoreApplication.translate("MainWindow", u"Factor", None))
+                self.label_5.setText(QCoreApplication.translate("MainWindow", u"          Add Altitude", None))
                 self.groupBox_3.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
-                self.Radio_Height_AccordingToValue.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
-                self.Radio_Height_AccordingToConstent.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
+
+                # Height radio buttons
+                self.radioButton_5.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_6.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
+
+                # Size radio buttons
                 self.radioButton_3.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
                 self.radioButton_4.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
                 self.groupBox_5.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
-                self.Radio_Color_AccordingToValue.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
-                self.Radio_Color_AccordingToConst.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
-                self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
-                self.checkBox_Outline.setText(QCoreApplication.translate("MainWindow", u"Outline", None))
-                self.label_Color_SelectCol.setText(QCoreApplication.translate("MainWindow", u"Select Color", None))
-                self.comboBox_Color.setItemText(0, QCoreApplication.translate("MainWindow", u"Use Hex Code", None))
-                self.comboBox_Color.setItemText(1, QCoreApplication.translate("MainWindow", u"Red", None))
-                self.comboBox_Color.setItemText(2, QCoreApplication.translate("MainWindow", u"Blue", None))
-                self.comboBox_Color.setItemText(3, QCoreApplication.translate("MainWindow", u"Green", None))
-                self.comboBox_Color.setItemText(4, QCoreApplication.translate("MainWindow", u"Pink", None))
-                self.comboBox_Color.setItemText(5, QCoreApplication.translate("MainWindow", u"Lime", None))
-                self.comboBox_Color.setItemText(6, QCoreApplication.translate("MainWindow", u"Black", None))
 
-                self.label_Color_HexCode.setText(QCoreApplication.translate("MainWindow", u"Hex Code", None))
+                # Color radio buttons
+                self.radioButton_7.setText(QCoreApplication.translate("MainWindow", u"According to Value", None))
+                self.radioButton_8.setText(QCoreApplication.translate("MainWindow", u"According to Constant", None))
+                self.groupBox_6.setTitle(QCoreApplication.translate("MainWindow", u"Color", None))
+                self.checkBox.setText(QCoreApplication.translate("MainWindow", u"Outline", None))
+                self.label_6.setText(QCoreApplication.translate("MainWindow", u"Work in Progress Function", None))
                 self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Raine M. Rodgers", None))
-                self.version.setText(QCoreApplication.translate("MainWindow", u"v0.9", None))
+                self.version.setText(QCoreApplication.translate("MainWindow", u"v1.0", None))
+        # retranslateUi
+

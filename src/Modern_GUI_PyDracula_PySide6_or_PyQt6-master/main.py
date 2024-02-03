@@ -77,11 +77,11 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.HomeButton)
-        widgets.btn_new.clicked.connect(self.NewButton)
+        widgets.btn_edit.clicked.connect(self.NewButton)
         widgets.btn_save.clicked.connect(self.SaveButton)
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
-        widgets.btn_importFile.clicked.connect(self.ImportFileButton)
+        widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
         # EXTRA LEFT BOX
@@ -152,7 +152,7 @@ class MainWindow(QMainWindow):
             widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
         print(f'Button "{btnName}" pressed!')
 
-    def ImportFileButton(self):
+    def ChoseDirButton(self):
         #TODO: read kml file
         #TODO: set table size to what the parsed file declares
         #TODO: set all values to what the parsed file declares
@@ -171,27 +171,17 @@ class MainWindow(QMainWindow):
         y = float(0)
         polygonName = ""
         value = float(0)
+        heightFactor = float(1)
         coordinates = []
         outlineIsChecked = False
 
-        def isCellEmpty(): # no clue what None is but it works... i think kinda at least
-            if widgets.tableWidget.item(row, column) is None or widgets.tableWidget.item(row, column).text() == "":
+        if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
+
+        def isCellEmpty(rowCheck, columnCheck): # no clue what None is but it works... i think kinda at least
+            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
                 return True
             else:
                 return False
-
-        # function which sets value variable to the input of line edit 5 if radio button 6 is checked
-        # ///////////////////////////////////////////////////////////////
-        def CheckConstantHeight():
-            if widgets.radioButton_6.isChecked() and not CheckLineEdit5Empty():
-                value = float(widgets.lineEdit_5.text())
-            else: value = 0
-        
-        # is line edit 5 empty
-        # ///////////////////////////////////////////////////////////////
-        def CheckLineEdit5Empty():
-            if widgets.lineEdit_5.text() == ('' or ""): return True
-            else: return False
         # create coords
         # ///////////////////////////////////////////////////////////////
         
@@ -199,23 +189,26 @@ class MainWindow(QMainWindow):
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 if column == 0:
-                    if isCellEmpty(): x = 0; y = 0; print(f"empty at {row, column}") #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
+                    if isCellEmpty(row, column): x = 0; y = 0; print(f"empty at {row, column}") #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
                     else: x=float(widgets.tableWidget.item(row, column).text())
                 elif column == 1:
-                    if isCellEmpty(): x = 0; y = 0; print(f"empty at {row, column}")
+                    if isCellEmpty(row, column): x = 0; y = 0; print(f"empty at {row, column}")
                     else: y=float(widgets.tableWidget.item(row, column).text())
                 elif column == 2:
-                    if isCellEmpty(): polygonName = "No-Name"; print(f"empty at {row, column}")
+                    if isCellEmpty(row, column): polygonName = "No-Name"; print(f"empty at {row, column}")
                     else: polygonName=widgets.tableWidget.item(row, column).text()
                 elif column == 3:
-                    if isCellEmpty() == False: value=float(widgets.tableWidget.item(row, column).text()); print(f"empty at {row, column}")
-                    elif CheckLineEdit5Empty(): value = 0
-                    else: CheckConstantHeight()
+                    if isCellEmpty(row, column)==False and widgets.Radio_Height_AccordingToConstent.isChecked()==False: # and widgets.Radio_Height_AccordingToValue.isChecked()==False
+                        value=float(widgets.tableWidget.item(row, column).text())
+                    elif widgets.Radio_Height_AccordingToConstent.isChecked():
+                        value=float(widgets.lineEdit_Height_SetConst.text())
+                    else: value = 0
+                    value *= heightFactor
             coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
-        if widgets.checkBox.isChecked(): outlineIsChecked = True
+        if widgets.checkBox_Outline.isChecked(): outlineIsChecked = True
         if self.exeptionHandler("NameLess"):
-            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked, self.filePath)
+            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         
@@ -224,7 +217,7 @@ class MainWindow(QMainWindow):
 
     def exeptionHandler(self, type):
         if type == "NameLess":
-            if not (widgets.lineEdit.text() is None or widgets.lineEdit.text()==""):
+            if not (widgets.lineEdit_FileName.text() is None or widgets.lineEdit_FileName.text()==""):
                 return True
             else: messagebox.showerror("Error", "Please enter a file name")
 #        elif type == "NoSave":
