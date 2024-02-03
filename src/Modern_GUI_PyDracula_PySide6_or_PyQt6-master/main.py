@@ -91,6 +91,7 @@ class MainWindow(QMainWindow):
         widgets.btn_save.clicked.connect(self.SaveButton)
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
+        widgets.btn_deleteSelected.clicked.connect(self.DeleteRowSelectedButton)
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
@@ -164,6 +165,16 @@ class MainWindow(QMainWindow):
 
         if widgets.tableWidget.rowCount() > 1:
             widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
+        print(f'Button "{btnName}" pressed!')
+
+#TODO: make it so that it only deletes the selected row
+    def DeleteRowSelectedButton(self):
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        if widgets.tableWidget.rowCount() > 1:
+            widgets.tableWidget.removeRow(widgets.tableWidget.currentRow())
         print(f'Button "{btnName}" pressed!')
 
     def ChoseDirButton(self):
