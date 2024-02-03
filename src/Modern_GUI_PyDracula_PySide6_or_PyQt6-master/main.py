@@ -213,9 +213,10 @@ class MainWindow(QMainWindow):
         def formatHex():
             if "#" in self.color:
                 self.color = self.color.replace("#", "")
-            self.color[::-1]
-            print(f'formated hex: {self.color}')
+            temp = self.color[::-1]
+            self.color = temp
             self.color = "ff" + self.color
+            print(f'formated hex: {self.color}')
 
         def choseColor():
             if(widgets.comboBox_Color.currentIndex() == 0):
@@ -259,8 +260,8 @@ class MainWindow(QMainWindow):
         if self.exeptionHandler("NameLess"):
             if widgets.Radio_Color_AccordingToConstent.isChecked():
                 choseColor()
-            else: color = "Na"
-            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, color, self.filePath)
+            else: self.color = "Na"
+            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         

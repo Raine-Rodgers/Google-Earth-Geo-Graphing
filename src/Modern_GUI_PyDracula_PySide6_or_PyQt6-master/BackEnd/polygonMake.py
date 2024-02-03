@@ -34,18 +34,29 @@ class MakeFile:
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
         self.__barColor = barColor # color of the bar graph
+        self.min = self.__coordObjList[0].getZ()
+        self.max = self.__coordObjList[0].getZ()
+        for i in range(len(self.__coordObjList)):
+            if self.__coordObjList[i].getZ() < self.min: self.min = self.__coordObjList[i].getZ()
+            if self.__coordObjList[i].getZ() > self.max: self.max = self.__coordObjList[i].getZ()
 
     def convertToHex(self, color):
-        # Convert color value to RGB
-        r, g, b = colorsys.hsv_to_rgb(color / 360, 1, 1)
+        
+        # Normalize the color value between 0 and 1
+        normalized_color = (color - self.min) / (self.max - self.min)
+        
+        # Reverse the normalized color value
+        reversed_color = 1 - normalized_color
+        
+        # Convert reversed normalized color value to RGB
+        r, g, b = colorsys.hsv_to_rgb(reversed_color * 0.666, 1, 1)
         
         # Convert RGB to hex code
-        # for some reason its reversed and is registered as bgr instead of rgb
-        hex_code = 'ff%02x%02x%02x' % (int(r * 255), int(g * 255), int(b * 255))
-        print(hex_code)
+        # Reverse the order of RGB and convert to hex code
+        hex_code = 'ff%02x%02x%02x' % (int(b * 255), int(g * 255), int(r * 255))
         
         return hex_code
-    
+
 
     def saveFile(self):
         self.__kml.save(self.__filePath + "/" + self.__fileName + ".kml") # saves file with a name stored in a variable
@@ -64,6 +75,7 @@ class MakeFile:
             if self.__barColor == "Na":
                 pol.style.polystyle.color = self.convertToHex(self.__coordObjList[i].getZ())#simplekml.Color.changealphaint(200, simplekml.Color.) # set color of polygonw // 
             else:
+                print(self.__barColor)
                 pol.style.polystyle.color = self.__barColor
             if self.__outlineIsChecked: pol.style.polystyle.outline = 1
             else: pol.style.polystyle.outline = 0
