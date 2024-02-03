@@ -239,13 +239,13 @@ class MainWindow(QMainWindow):
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 if column == 0:
-                    if isCellEmpty(row, column): x = 0; y = 0; print(f"empty at {row, column}") #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
+                    if isCellEmpty(row, column): x = 0
                     else: x=float(widgets.tableWidget.item(row, column).text())
                 elif column == 1:
-                    if isCellEmpty(row, column): x = 0; y = 0; print(f"empty at {row, column}")
+                    if isCellEmpty(row, column): y = 0
                     else: y=float(widgets.tableWidget.item(row, column).text())
                 elif column == 2:
-                    if isCellEmpty(row, column): polygonName = "No-Name"; print(f"empty at {row, column}")
+                    if isCellEmpty(row, column): polygonName = "No-Name"
                     else: polygonName=widgets.tableWidget.item(row, column).text()
                 elif column == 3:
                     if isCellEmpty(row, column)==False and widgets.Radio_Height_AccordingToConstent.isChecked()==False: # and widgets.Radio_Height_AccordingToValue.isChecked()==False
@@ -288,7 +288,6 @@ class MainWindow(QMainWindow):
                 if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
                 else: pickledArray.append(widgets.tableWidget.item(row, column).text())
         pickle.dump( pickledArray, open( "save.p", "wb" ))
-        #TODO: save table values to a file when program is closed
 
 
         #TODO: set table size to what the parsed file declares
