@@ -13,7 +13,6 @@ from PySide6.QtGui import *
 from PySide6.QtWidgets import *
 from . resources_rc import *
 
-#TODO: change default name for buttons cuz that shits a mess rn frfr
 
 class Ui_MainWindow(object):
         def setupUi(self, MainWindow):

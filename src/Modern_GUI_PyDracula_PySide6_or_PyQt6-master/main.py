@@ -91,7 +91,7 @@ class MainWindow(QMainWindow):
         widgets.btn_save.clicked.connect(self.SaveButton)
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
-        widgets.btn_deleteSelected.clicked.connect(self.DeleteRowSelectedButton)
+        widgets.btn_deleteSelected.clicked.connect(self.DeleteSelectedRowsButton)
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
@@ -167,21 +167,25 @@ class MainWindow(QMainWindow):
             widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
         print(f'Button "{btnName}" pressed!')
 
-#TODO: make it so that it only deletes the selected row
-    def DeleteRowSelectedButton(self):
+    def DeleteSelectedRowsButton(self):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
 
-        if widgets.tableWidget.rowCount() > 1:
-            widgets.tableWidget.removeRow(widgets.tableWidget.currentRow())
+        selected_rows = widgets.tableWidget.selectedItems()
+        if len(selected_rows) > 0:
+            rows_to_delete = set()
+            for item in selected_rows:
+                row = item.row()
+                if row != 0:  # Check that it is not the first row
+                    rows_to_delete.add(row)
+            rows_to_delete = sorted(rows_to_delete, reverse=True)  # Reverse order to avoid index issues
+            for row in rows_to_delete:
+                widgets.tableWidget.removeRow(row)
+
         print(f'Button "{btnName}" pressed!')
 
     def ChoseDirButton(self):
-        #TODO: read kml file
-        #TODO: set table size to what the parsed file declares
-        #TODO: set all values to what the parsed file declares
-        #TODO: set file name to what the parsed file declares
         self.filePath = filedialog.askdirectory()
         print(self.filePath)
 
@@ -288,10 +292,6 @@ class MainWindow(QMainWindow):
                 if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
                 else: pickledArray.append(widgets.tableWidget.item(row, column).text())
         pickle.dump( pickledArray, open( "save.p", "wb" ))
-
-
-        #TODO: set table size to what the parsed file declares
-        #TODO: set table values to what the parsed file declares
 
 
     # RESIZE EVENTS
