@@ -127,6 +127,7 @@ class MainWindow(QMainWindow):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
+        print(widgets.lineEdit_5.text())
 
         # SHOW NEW PAGE
         widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
