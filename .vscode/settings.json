@@ -1,3 +1,4 @@
 {
-    "todo-tree.tree.showBadges": true
+    "todo-tree.tree.showBadges": true,
+    "python.analysis.typeCheckingMode": "off"
 }

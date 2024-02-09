@@ -47,6 +47,16 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
+        save_file = "save.p"
+        if os.path.isfile(save_file) and os.path.getsize(save_file) > 0:
+            temp = pickle.load(open(save_file, "rb"))
+            tempRow = 1
+            while len(temp) > 0:
+                tempRow += 1
+                for column in range(widgets.tableWidget.columnCount()):
+                    if tempRow > widgets.tableWidget.rowCount():
+                        widgets.tableWidget.insertRow(tempRow-1)
+                    widgets.tableWidget.setItem(tempRow-1, column, QTableWidgetItem(temp.pop(0)))
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
@@ -77,18 +87,19 @@ class MainWindow(QMainWindow):
 
         # LEFT MENUS
         widgets.btn_home.clicked.connect(self.HomeButton)
-        widgets.btn_new.clicked.connect(self.NewButton)
+        widgets.btn_edit.clicked.connect(self.NewButton)
         widgets.btn_save.clicked.connect(self.SaveButton)
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
-        widgets.btn_importFile.clicked.connect(self.ImportFileButton)
+        widgets.btn_deleteSelected.clicked.connect(self.DeleteRowSelectedButton)
+        widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
         # EXTRA LEFT BOX
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
         widgets.toggleLeftBox.clicked.connect(openCloseLeftBox)
-#        widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
+        # widgets.extraCloseColumnBtn.clicked.connect(openCloseLeftBox)
 
         # EXTRA RIGHT BOX
         def openCloseRightBox():
@@ -142,6 +153,10 @@ class MainWindow(QMainWindow):
 
             row_position = widgets.tableWidget.rowCount()
             widgets.tableWidget.insertRow(row_position)
+            widgets.tableWidget.setItem(row_position+1, 0, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 1, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 2, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(row_position+1, 3, QTableWidgetItem(" "))
             print(f'Button "{btnName}" pressed!')
 
     def DeleteRowButton(self):
@@ -153,7 +168,17 @@ class MainWindow(QMainWindow):
             widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
         print(f'Button "{btnName}" pressed!')
 
-    def ImportFileButton(self):
+#TODO: make it so that it only deletes the selected row
+    def DeleteRowSelectedButton(self):
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        if widgets.tableWidget.rowCount() > 1:
+            widgets.tableWidget.removeRow(widgets.tableWidget.currentRow())
+        print(f'Button "{btnName}" pressed!')
+
+    def ChoseDirButton(self):
         #TODO: read kml file
         #TODO: set table size to what the parsed file declares
         #TODO: set all values to what the parsed file declares
@@ -172,51 +197,72 @@ class MainWindow(QMainWindow):
         y = float(0)
         polygonName = ""
         value = float(0)
+        heightFactor = float(1)
         coordinates = []
         outlineIsChecked = False
+        color = ""
 
-        def isCellEmpty(): # no clue what None is but it works... i think kinda at least
-            if widgets.tableWidget.item(row, column) is None or not widgets.tableWidget.item(row, column).text().isdigit():
+        if not(widgets.lineEdit_Height_Factor.text() is None or widgets.lineEdit_Height_Factor.text() ==""):
+            if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
+
+        def isCellEmpty(rowCheck, columnCheck):
+            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
                 return True
             else:
                 return False
-
-        # function which sets value variable to the input of line edit 5 if radio button 6 is checked
-        # ///////////////////////////////////////////////////////////////
-        def CheckConstantHeight():
-            if widgets.radioButton_6.isChecked() and not CheckLineEdit5Empty():
-                value = float(widgets.lineEdit_5.text())
-            else: value = 0
         
-        # is line edit 5 empty
-        # ///////////////////////////////////////////////////////////////
-        def CheckLineEdit5Empty():
-            if widgets.lineEdit_5.text() == ('' or ""): return True
-            else: return False
+        def formatHex():
+            if "#" in self.color:
+                self.color = self.color.replace("#", "")
+            temp = self.color[::-1]
+            self.color = temp
+            self.color = "ff" + self.color
+            print(f'formated hex: {self.color}')
+
+        def choseColor():
+            if(widgets.comboBox_Color.currentIndex() == 0):
+                if(widgets.lineEdit_Color_HexCode.text() == "" or widgets.lineEdit_Color_HexCode is None): self.color = "ffff0000" # if hexcode is empty, set color to blue
+                else:
+                    if self.exeptionHandler("InvalidHex"):
+                        self.color = widgets.lineEdit_Color_HexCode.text()
+                        print(f'unformated hex: {self.color}')
+                        formatHex()
+            elif(widgets.comboBox_Color.currentIndex() == 1): self.color = "ff0000ff"
+            elif(widgets.comboBox_Color.currentIndex() == 2): self.color = "ff00ff00"
+            elif(widgets.comboBox_Color.currentIndex() == 3): self.color = "ffff0000"
+            elif(widgets.comboBox_Color.currentIndex() == 4): self.color = "ffff00ff"
+            elif(widgets.comboBox_Color.currentIndex() == 5): self.color = "ff32CD32"
+            elif(widgets.comboBox_Color.currentIndex() == 6): self.color = "ff000000"
         # create coords
         # ///////////////////////////////////////////////////////////////
-        
+
         # 2D array iteration type beat
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 if column == 0:
-                    if isCellEmpty(): x = 48.0677873; y = 12.8578328 #just realised this shit be fucked cuz if y is declared afterwards it might be funky but who asked
+                    if isCellEmpty(row, column): x = 0
                     else: x=float(widgets.tableWidget.item(row, column).text())
                 elif column == 1:
-                    if isCellEmpty(): x = 48.0677873; y = 12.8578328
+                    if isCellEmpty(row, column): y = 0
                     else: y=float(widgets.tableWidget.item(row, column).text())
                 elif column == 2:
-                    if isCellEmpty(): polygonName = "No-Name"
+                    if isCellEmpty(row, column): polygonName = "No-Name"
                     else: polygonName=widgets.tableWidget.item(row, column).text()
                 elif column == 3:
-                    if not isCellEmpty(): value=float(widgets.tableWidget.item(row, column).text())
-                    elif CheckLineEdit5Empty(): value = 0
-                    else: CheckConstantHeight()
+                    if isCellEmpty(row, column)==False and widgets.Radio_Height_AccordingToConstent.isChecked()==False: # and widgets.Radio_Height_AccordingToValue.isChecked()==False
+                        value=float(widgets.tableWidget.item(row, column).text())
+                    elif widgets.Radio_Height_AccordingToConstent.isChecked() and widgets.lineEdit_Height_SetConst.text() != "":
+                        value=float(widgets.lineEdit_Height_SetConst.text())
+                    else: value = 0
+                    value *= heightFactor
             coordinates.append(CreateCoordinates(x, y, value, polygonName))
 
-        if widgets.checkBox.isChecked(): outlineIsChecked = True
+        if widgets.checkBox_Outline.isChecked(): outlineIsChecked = True
         if self.exeptionHandler("NameLess"):
-            finalFile = MakeFile(coordinates, widgets.lineEdit.text(), outlineIsChecked, self.filePath)
+            if widgets.Radio_Color_AccordingToConstent.isChecked():
+                choseColor()
+            else: self.color = "Na"
+            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         
@@ -225,18 +271,24 @@ class MainWindow(QMainWindow):
 
     def exeptionHandler(self, type):
         if type == "NameLess":
-            if not (widgets.lineEdit.text() is None or widgets.lineEdit.text()==""):
+            if not (widgets.lineEdit_FileName.text() is None or widgets.lineEdit_FileName.text()==""):
                 return True
             else: messagebox.showerror("Error", "Please enter a file name")
-#        elif type == "NoSave":
+
+        elif type == "InvalidHex":
+            if len(widgets.lineEdit_Color_HexCode.text()) == 6:
+                return True
+            else: messagebox.showerror("Error", "Please enter a valid hex code")
         else: return False
+
     def myExitHandler(self):
-        tableValuesUnpickled = []
+        pickledArray = []
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
-                tableValuesUnpickled.append(widgets.tableWidget.item(row, column).text())
-        tableValuesPickled = pickle.dumps(tableValuesUnpickled)
-        #TODO: save table values to a file when program is closed
+                print(row, column)
+                if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
+                else: pickledArray.append(widgets.tableWidget.item(row, column).text())
+        pickle.dump( pickledArray, open( "save.p", "wb" ))
 
 
         #TODO: set table size to what the parsed file declares
