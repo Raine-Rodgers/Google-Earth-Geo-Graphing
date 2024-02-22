@@ -1382,7 +1382,7 @@ class Ui_MainWindow(object):
                 __sortingEnabled = self.tableWidget.isSortingEnabled()
                 self.tableWidget.setSortingEnabled(False)
                 ___qtablewidgetitem20 = self.tableWidget.item(0, 0)
-                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Test", None));
+                ___qtablewidgetitem20.setText(QCoreApplication.translate("MainWindow", u"Latitude", None));
                 ___qtablewidgetitem21 = self.tableWidget.item(0, 1)
                 ___qtablewidgetitem21.setText(QCoreApplication.translate("MainWindow", u"Text", None));
                 ___qtablewidgetitem22 = self.tableWidget.item(0, 2)
