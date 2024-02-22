@@ -138,7 +138,6 @@ class MainWindow(QMainWindow):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
-        print(widgets.lineEdit_5.text())
 
         # SHOW NEW PAGE
         widgets.stackedWidget.setCurrentWidget(widgets.new_page) # SET PAGE
@@ -210,7 +209,7 @@ class MainWindow(QMainWindow):
             if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
 
         def isCellEmpty(rowCheck, columnCheck):
-            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text().isdigit() == False:
+            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
                 return True
             else:
                 return False
@@ -257,7 +256,7 @@ class MainWindow(QMainWindow):
                         value=float(widgets.tableWidget.item(row, column).text())
                     elif widgets.Radio_Height_AccordingToConstent.isChecked() and widgets.lineEdit_Height_SetConst.text() != "":
                         value=float(widgets.lineEdit_Height_SetConst.text())
-                    else: value = 0
+                    else: value = 1
                     value *= heightFactor
             coordinates.append(CreateCoordinates(x, y, value, polygonName))
 

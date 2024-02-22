@@ -1,6 +1,7 @@
 import colorsys
 import simplekml
 from pykml import parser
+#TODO: use pykml to parse file and get coordinates
 
 # create an object with x, y, z values, a name for the polyogn. the z coordinate will represent the value of the polyogn
 # ///////////////////////////////////////////////////////////////
@@ -42,8 +43,6 @@ class MakeFile:
     def convertToHex(self, color):
         
         # Normalize the color value between 0 and 1
-        if self.min == self.max:
-            return 'ffff0000'
         normalized_color = (color - self.min) / (self.max - self.min)
         
         # Reverse the normalized color value
