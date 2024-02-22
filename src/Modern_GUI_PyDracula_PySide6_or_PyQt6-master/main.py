@@ -209,7 +209,7 @@ class MainWindow(QMainWindow):
             if float(widgets.lineEdit_Height_Factor.text()) >= 1: heightFactor = float(widgets.lineEdit_Height_Factor.text())
 
         def isCellEmpty(rowCheck, columnCheck):
-            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text() == "":
+            if widgets.tableWidget.item(rowCheck, columnCheck) is None or widgets.tableWidget.item(rowCheck, columnCheck).text().isdigit() == False:
                 return True
             else:
                 return False
