@@ -1,0 +1,2 @@
+i deleted most of the test folder fiels since they were just me messing around
+and not actual test isntances so they did nothing but increase file size
