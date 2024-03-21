@@ -14,10 +14,10 @@ target = Executable(
 
 # SETUP CX FREEZE
 setup(
-    name = "PyDracula",
+    name = "GE Graphing Tool",
     version = "1.0",
-    description = "Modern GUI for Python applications",
-    author = "Wanderson M. Pimenta",
+    description = "interface for creating bar graphs in Google Earth",
+    author = "Raine M. Rodgers",
     options = {'build_exe' : {'include_files' : files}},
     executables = [target]
     
