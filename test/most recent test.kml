@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="6">
+            <PolyStyle id="7">
+                <color>ffff0100</color>
+                <colorMode>normal</colorMode>
+                <fill>1</fill>
+                <outline>c8008000</outline>
+            </PolyStyle>
+        </Style>
+        <Style id="12">
+            <PolyStyle id="13">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <fill>1</fill>
+                <outline>c8008000</outline>
+            </PolyStyle>
+        </Style>
+        <Placemark id="3">
+            <name>thing 1</name>
+            <styleUrl>#6</styleUrl>
+            <Polygon id="2">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="4">
+                        <coordinates>21.0,21.0,50.0 21.00039,20.99981,50.0 21.00062,21.00013,50.0 21.00023,21.00033,50.0 21.0,21.0,50.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="9">
+            <name>thing 2</name>
+            <styleUrl>#12</styleUrl>
+            <Polygon id="8">
+                <extrude>1</extrude>
+                <altitudeMode>relativeToGround</altitudeMode>
+                <outerBoundaryIs>
+                    <LinearRing id="10">
+                        <coordinates>21.0,21.002765,100.0 21.00039,21.002575,100.0 21.00062,21.002895,100.0 21.00023,21.003095000000002,100.0 21.0,21.002765,100.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>
