@@ -23,7 +23,7 @@ class Ui_MainWindow(object):
                 self.styleSheet = QWidget(MainWindow)
                 self.styleSheet.setObjectName(u"styleSheet")
                 font = QFont()
-                font.setFamily(u"Chicago")
+                font.setFamily(u"Arial")
                 font.setPointSize(10)
                 font.setBold(False)
                 font.setItalic(False)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
 "\n"
 "QWidget{\n"
 "	color: rgb(221, 221, 221);\n"
-"	font: 10pt \"Chicago\";\n"
+"	font: 10pt \"Arial\";\n"
 "}\n"
 "\n"
 "/* /////////////////////////////////////////////////////////////////////////////////////////////////\n"
@@ -75,8 +75,8 @@ class Ui_MainWindow(object):
 "	background-position: centered;\n"
 "	background-repeat: no-repeat;\n"
 "}\n"
-"#titleLeftApp { font: 63 12pt \"Chicago Semibold\"; }\n"
-"#titleLeftDescription { font: 8pt \"Chicago\"; color: rgb(189, 147, 249); }\n"
+"#titleLeftApp { font: 63 12pt \"Arial Semibold\"; }\n"
+"#titleLeftDescription { font: 8pt \"Arial\"; color: rgb(189, 147, 249); }\n"
 "\n"
 "/* MENUS */\n"
 "#topMenu .QPushButton {	\n"
@@ -772,7 +772,7 @@ class Ui_MainWindow(object):
                 self.maximizeRestoreAppBtn.setMinimumSize(QSize(28, 28))
                 self.maximizeRestoreAppBtn.setMaximumSize(QSize(28, 28))
                 font1 = QFont()
-                font1.setFamilies([u"Chicago"])
+                font1.setFamilies([u"Arial"])
                 font1.setPointSize(10)
                 font1.setBold(False)
                 font1.setItalic(False)
@@ -943,7 +943,7 @@ class Ui_MainWindow(object):
                 if (self.tableWidget.rowCount() < 16):
                         self.tableWidget.setRowCount(16)
                 font2 = QFont()
-                font2.setFamilies([u"Chicago"])
+                font2.setFamilies([u"Arial"])
                 __qtablewidgetitem4 = QTableWidgetItem()
                 __qtablewidgetitem4.setFont(font2);
                 self.tableWidget.setVerticalHeaderItem(0, __qtablewidgetitem4)
@@ -1264,7 +1264,7 @@ class Ui_MainWindow(object):
                 self.creditsLabel.setObjectName(u"creditsLabel")
                 self.creditsLabel.setMaximumSize(QSize(16777215, 16))
                 font3 = QFont()
-                font3.setFamilies([u"Chicago"])
+                font3.setFamilies([u"Arial"])
                 font3.setBold(False)
                 font3.setItalic(False)
                 self.creditsLabel.setFont(font3)
