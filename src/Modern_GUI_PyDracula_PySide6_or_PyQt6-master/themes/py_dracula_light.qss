@@ -19,7 +19,7 @@ DARK THEME - DRACULA COLOR BASED
 
 QWidget{
 	color: #333;
-	font: 10pt "Segoe UI";
+	font: 10pt "Chicago";
 }
 
 /* /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -57,8 +57,8 @@ Left Menu */
 	background-position: centered;
 	background-repeat: no-repeat;
 }
-#titleLeftApp { font: 63 12pt "Segoe UI Semibold"; color: #f8f8f2; }
-#titleLeftDescription { font: 8pt "Segoe UI"; color: #bd93f9; }
+#titleLeftApp { font: 63 12pt "Chicago Semibold"; color: #f8f8f2; }
+#titleLeftDescription { font: 8pt "Chicago"; color: #bd93f9; }
 
 /* MENUS */
 #topMenu .QPushButton {	
