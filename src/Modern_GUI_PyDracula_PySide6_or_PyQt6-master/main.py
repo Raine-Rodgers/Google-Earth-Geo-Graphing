@@ -46,7 +46,7 @@ class MainWindow(QMainWindow):
         else: app = QApplication.instance()
         global widgets
         widgets = self.ui
-        tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
+        #tkinter.Tk().withdraw() # prevents an empty tkinter window from appearing
         save_file = "save.p"
         if os.path.isfile(save_file) and os.path.getsize(save_file) > 0:
             temp = pickle.load(open(save_file, "rb"))
