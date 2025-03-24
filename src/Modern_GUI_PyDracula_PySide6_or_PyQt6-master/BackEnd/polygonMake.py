@@ -67,11 +67,11 @@ class MakeFile:
 
     def makePolygon(self):
         for i in range(len(self.__coordObjList)): # iterate through the list of coordinate objects
-            pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00039, self.__coordObjList[i].getY()-0.00019, self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00062, self.__coordObjList[i].getY()+0.00013, self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00023, self.__coordObjList[i].getY()+0.00033, self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX(), self.__coordObjList[i].getY(), self.__coordObjList[i].getZ()),])
+            pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),          self.__coordObjList[i].getZ()),
+                                                                                                (self.__coordObjList[i].getX()+0.00039,  self.__coordObjList[i].getY()-0.00019,  self.__coordObjList[i].getZ()),
+                                                                                                (self.__coordObjList[i].getX()+0.00062,  self.__coordObjList[i].getY()+0.00013,  self.__coordObjList[i].getZ()),
+                                                                                                (self.__coordObjList[i].getX()+0.00023,  self.__coordObjList[i].getY()+0.00033,  self.__coordObjList[i].getZ()),
+                                                                                                (self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),          self.__coordObjList[i].getZ()),])
             print(self.__coordObjList[i])
             pol.extrude = 1 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
