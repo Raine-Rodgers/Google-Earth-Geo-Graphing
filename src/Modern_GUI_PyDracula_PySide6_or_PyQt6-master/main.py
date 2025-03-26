@@ -21,6 +21,7 @@ from BackEnd.polygonMake import *
 import tkinter
 from tkinter import filedialog, messagebox # import responsible for error messaging and file import
 import pickle
+import subprocess
 
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
@@ -186,8 +187,22 @@ class MainWindow(QMainWindow):
         print(f'Button "{btnName}" pressed!')
 
     def ChoseDirButton(self):
-        self.filePath = filedialog.askdirectory()
+
+        applescript = '''
+            tell application "Finder"
+                set selectedFolder to (choose folder with prompt "Select a folder") as text
+            end tell
+            '''
+    
+        # Run the AppleScript via osascript
+        result = subprocess.run(['osascript', '-e', applescript], capture_output=True, text=True)
+        
+        # Get the result (folder path)
+        self.filePath = result.stdout.strip()
         print(self.filePath)
+
+        # self.filePath = filedialog.askdirectory()
+        # print(self.filePath)
 
     def SaveButton(self):
         # GET BUTTON CLICKED
