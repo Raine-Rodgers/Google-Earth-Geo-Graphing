@@ -1,4 +1,4 @@
-#!/Users/rainerodgers/Documents/GitHub/Google-Earth-Geo-Graphing/.venv/bin/python3
+#!/Users/rainerodgers/Documents/GitHub/Google-Earth-Geo-Graphing/.venv/bin/python3.13
 # -*- coding: utf-8 -*-
 import re
 import sys
