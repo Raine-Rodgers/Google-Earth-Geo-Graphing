@@ -288,12 +288,32 @@ class MainWindow(QMainWindow):
         if type == "NameLess":
             if not (widgets.lineEdit_FileName.text() is None or widgets.lineEdit_FileName.text()==""):
                 return True
-            else: messagebox.showerror("Error", "Please enter a file name")
+            else: 
+                applescript = f'''
+                tell application "System Events"
+                    display dialog "Please enter a file name" with title "NameLess" buttons {{"OK"}} default button "OK"
+                end tell
+                '''
+                # Run the AppleScript via osascript
+                subprocess.run(['osascript', '-e', applescript])
+                
+                
+                #messagebox.showerror("Error", "Please enter a file name")
 
         elif type == "InvalidHex":
             if len(widgets.lineEdit_Color_HexCode.text()) == 6:
                 return True
-            else: messagebox.showerror("Error", "Please enter a valid hex code")
+            else: 
+                applescript = f'''
+                tell application "System Events"
+                    display dialog "Please enter a valid Hex Code" with title "InvalidHex" buttons {{"OK"}} default button "OK"
+                end tell
+                '''
+                # Run the AppleScript via osascript
+                subprocess.run(['osascript', '-e', applescript])
+                
+                
+                #messagebox.showerror("Error", "Please enter a valid hex code")
         else: return False
 
     def myExitHandler(self):
