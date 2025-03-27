@@ -187,9 +187,10 @@ class MainWindow(QMainWindow):
 
         applescript = '''
             tell application "Finder"
-                set selectedFolder to (choose folder with prompt "Select a folder") as text
+                set folderPath to POSIX path of (choose folder)
             end tell
             '''
+                #set selectedFolder to (choose folder with prompt "Select a folder") as text
     
         # Run the AppleScript via osascript
         result = subprocess.run(['osascript', '-e', applescript], capture_output=True, text=True)
@@ -318,12 +319,13 @@ class MainWindow(QMainWindow):
 
     def myExitHandler(self):
         pickledArray = []
+        cwd = os.getcwd()
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 print(row, column)
                 if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
                 else: pickledArray.append(widgets.tableWidget.item(row, column).text())
-        pickle.dump( pickledArray, open( "save.p", "wb" ))
+        pickle.dump( pickledArray, open( f"{cwd}/save.p", "wb" ))
 
 
     # RESIZE EVENTS
