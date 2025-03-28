@@ -38,6 +38,9 @@ class MainWindow(QMainWindow):
 
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
+        user_home = os.path.expanduser("~") # Get the user's home directory
+        global documents_folder 
+        documents_folder = os.path.join(user_home, 'Documents') # Get the relative path to the Documents folder
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         self.filePath = os.path.expanduser("~/Desktop")
@@ -46,8 +49,8 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         save_file = "save.p"
-        if os.path.isfile(save_file) and os.path.getsize(save_file) > 0:
-            temp = pickle.load(open(save_file, "rb"))
+        if os.path.isfile(f"{documents_folder}/save_file") and os.path.getsize(save_file) > 0:
+            temp = pickle.load(open(f"{documents_folder}/save_file", "rb"))
             tempRow = 1
             while len(temp) > 0:
                 tempRow += 1
@@ -319,13 +322,12 @@ class MainWindow(QMainWindow):
 
     def myExitHandler(self):
         pickledArray = []
-        cwd = os.getcwd()
         for row in range(1, widgets.tableWidget.rowCount()):
             for column in range(widgets.tableWidget.columnCount()):
                 print(row, column)
                 if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
                 else: pickledArray.append(widgets.tableWidget.item(row, column).text())
-        pickle.dump( pickledArray, open( f"{cwd}/save.p", "wb" ))
+        pickle.dump( pickledArray, open( f"{documents_folder}/save.p", "wb" ))
 
 
     # RESIZE EVENTS
