@@ -48,9 +48,10 @@ class MainWindow(QMainWindow):
         else: app = QApplication.instance()
         global widgets
         widgets = self.ui
+        global save_file
         save_file = "save.p"
-        if os.path.isfile(f"{documents_folder}/save_file") and os.path.getsize(save_file) > 0:
-            temp = pickle.load(open(f"{documents_folder}/save_file", "rb"))
+        if os.path.isfile(f"{documents_folder}/{save_file}"):
+            temp = pickle.load(open(f"{documents_folder}/{save_file}", "rb"))
             tempRow = 1
             while len(temp) > 0:
                 tempRow += 1
@@ -327,7 +328,7 @@ class MainWindow(QMainWindow):
                 print(row, column)
                 if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
                 else: pickledArray.append(widgets.tableWidget.item(row, column).text())
-        pickle.dump( pickledArray, open( f"{documents_folder}/save.p", "wb" ))
+        pickle.dump( pickledArray, open( f"{documents_folder}/{save_file}", "wb" ))
 
 
     # RESIZE EVENTS
