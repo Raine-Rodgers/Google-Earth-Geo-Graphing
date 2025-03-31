@@ -50,15 +50,22 @@ class MainWindow(QMainWindow):
         widgets = self.ui
         global save_file
         save_file = "save.p"
-        if os.path.isfile(f"{documents_folder}/{save_file}"):
-            temp = pickle.load(open(f"{documents_folder}/{save_file}", "rb"))
-            tempRow = 1
-            while len(temp) > 0:
-                tempRow += 1
-                for column in range(widgets.tableWidget.columnCount()):
-                    if tempRow > widgets.tableWidget.rowCount():
-                        widgets.tableWidget.insertRow(tempRow-1)
-                    widgets.tableWidget.setItem(tempRow-1, column, QTableWidgetItem(temp.pop(0)))
+        try:
+            if os.path.isfile(f"{documents_folder}/{save_file}"):
+                temp = pickle.load(open(f"{documents_folder}/{save_file}", "rb"))
+                tempRow = 1
+                while len(temp) > 0:
+                    tempRow += 1
+                    for column in range(widgets.tableWidget.columnCount()):
+                        if tempRow > widgets.tableWidget.rowCount():
+                            widgets.tableWidget.insertRow(tempRow-1)
+                        widgets.tableWidget.setItem(tempRow-1, column, QTableWidgetItem(temp.pop(0)))
+        except EOFError:
+            print("No data to load")
+        except FileNotFoundError:
+            print("File not found")
+        except Exception as e:
+            print(f"An error occurred: {e}")
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
