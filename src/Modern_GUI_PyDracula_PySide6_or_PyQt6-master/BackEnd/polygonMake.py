@@ -73,7 +73,7 @@ class MakeFile:
                                                                                                 (self.__coordObjList[i].getX()+0.00023,  self.__coordObjList[i].getY()+0.00033,  self.__coordObjList[i].getZ()),
                                                                                                 (self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),          self.__coordObjList[i].getZ()),])
             print(self.__coordObjList[i])
-            pol.extrude = 1 # connect it to the roud
+            pol.extrude = 0 # connect it to the roud
             pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
             if self.__barColor == "Na":
                 pol.style.polystyle.color = self.convertToHex(self.__coordObjList[i].getZ())#simplekml.Color.changealphaint(200, simplekml.Color.) # set color of polygonw // 

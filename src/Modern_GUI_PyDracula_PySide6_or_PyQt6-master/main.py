@@ -254,12 +254,12 @@ class MainWindow(QMainWindow):
                         self.color = widgets.lineEdit_Color_HexCode.text()
                         print(f'unformated hex: {self.color}')
                         formatHex()
-            elif(widgets.comboBox_Color.currentIndex() == 1): self.color = "ff0000ff"
-            elif(widgets.comboBox_Color.currentIndex() == 2): self.color = "ff00ff00"
-            elif(widgets.comboBox_Color.currentIndex() == 3): self.color = "ffff0000"
-            elif(widgets.comboBox_Color.currentIndex() == 4): self.color = "ffff00ff"
-            elif(widgets.comboBox_Color.currentIndex() == 5): self.color = "ff32CD32"
-            elif(widgets.comboBox_Color.currentIndex() == 6): self.color = "ff000000"
+            elif(widgets.comboBox_Color.currentIndex() == 1): self.color = "ff0000ff" # Blue
+            elif(widgets.comboBox_Color.currentIndex() == 2): self.color = "ff00ff00" # Green
+            elif(widgets.comboBox_Color.currentIndex() == 3): self.color = "ffff0000" # Red
+            elif(widgets.comboBox_Color.currentIndex() == 4): self.color = "ffff00ff" # Magenta
+            elif(widgets.comboBox_Color.currentIndex() == 5): self.color = "ff32CD32" # Lime
+            elif(widgets.comboBox_Color.currentIndex() == 6): self.color = "ff000000" # Black
         # create coords
         # ///////////////////////////////////////////////////////////////
 
