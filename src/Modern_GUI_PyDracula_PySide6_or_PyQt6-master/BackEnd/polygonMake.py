@@ -44,18 +44,6 @@ class MakeFile:
             if self.__coordObjList[i].getZ() < self.min: self.min = self.__coordObjList[i].getZ()
             if self.__coordObjList[i].getZ() > self.max: self.max = self.__coordObjList[i].getZ()
     
-    def __init__(self, coordObjList, fileName, outlineIsChecked, barColor, filePath, extraValue):
-        self.__filePath = filePath
-        self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
-        self.__fileName = fileName  # name of the file
-        self.__kml = simplekml.Kml() # creat the kml variable to uses
-        self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
-        self.__barColor = barColor # color of the bar graph
-        self.min = self.__coordObjList[0].getZ()
-        self.max = self.__coordObjList[0].getZ()
-        for i in range(len(self.__coordObjList)):
-            if self.__coordObjList[i].getZ() < self.min: self.min = self.__coordObjList[i].getZ()
-            if self.__coordObjList[i].getZ() > self.max: self.max = self.__coordObjList[i].getZ()
 
     def convertToHex(self, color):
         
