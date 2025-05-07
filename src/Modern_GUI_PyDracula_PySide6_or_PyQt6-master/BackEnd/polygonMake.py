@@ -5,12 +5,13 @@ from pykml import parser
 
 # create an object with x, y, z values, a name for the polyogn. the z coordinate will represent the value of the polyogn
 # ///////////////////////////////////////////////////////////////
-class CreateCoordinates:
-    def __init__(self, x, y, z, name):
+class CreateCoordinates: 
+    def __init__(self, x, y, z, name, z2):
         self.__name = name
         self.__x = x
         self.__y = y
         self.__z = z
+        self.__z2 = z2
 
     def getX(self):
         return self.__x
@@ -21,6 +22,9 @@ class CreateCoordinates:
     def getZ(self):
         return self.__z
     
+    def getZ2(self):
+        return self.__z2
+    
     def getName(self):
         return self.__name
 
@@ -28,6 +32,19 @@ class CreateCoordinates:
 # ///////////////////////////////////////////////////////////////
 class MakeFile:
     def __init__(self, coordObjList, fileName, outlineIsChecked, barColor, filePath):
+        self.__filePath = filePath
+        self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
+        self.__fileName = fileName  # name of the file
+        self.__kml = simplekml.Kml() # creat the kml variable to uses
+        self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
+        self.__barColor = barColor # color of the bar graph
+        self.min = self.__coordObjList[0].getZ()
+        self.max = self.__coordObjList[0].getZ()
+        for i in range(len(self.__coordObjList)):
+            if self.__coordObjList[i].getZ() < self.min: self.min = self.__coordObjList[i].getZ()
+            if self.__coordObjList[i].getZ() > self.max: self.max = self.__coordObjList[i].getZ()
+    
+    def __init__(self, coordObjList, fileName, outlineIsChecked, barColor, filePath, extraValue):
         self.__filePath = filePath
         self.__coordObjList = coordObjList # a list of coordinate objects created in the class above
         self.__fileName = fileName  # name of the file

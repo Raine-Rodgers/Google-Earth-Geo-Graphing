@@ -30,8 +30,6 @@ os.environ["QT_FONT_DPI"] = "96" # FIX Problem for High DPI and Scale above 100%
 # SET AS GLOBAL WIDGETS
 # ///////////////////////////////////////////////////////////////
 widgets = None
-
-
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
@@ -39,7 +37,8 @@ class MainWindow(QMainWindow):
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
         user_home = os.path.expanduser("~") # Get the user's home directory
-        global documents_folder 
+        global documents_folder
+        self.extraValueBool = False
         documents_folder = os.path.join(user_home, 'Documents') # Get the relative path to the Documents folder
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
@@ -101,6 +100,7 @@ class MainWindow(QMainWindow):
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_deleteSelected.clicked.connect(self.DeleteSelectedRowsButton)
+        widgets.btn_addCol.clicked.connect(self.AddColumnButton)
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
@@ -155,17 +155,29 @@ class MainWindow(QMainWindow):
         print(f'Button "{btnName}" pressed!')
 
     def AddRowButton(self):
-            # GET BUTTON CLICKED
-            btn = self.sender()
-            btnName = btn.objectName()
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
 
-            row_position = widgets.tableWidget.rowCount()
-            widgets.tableWidget.insertRow(row_position)
-            widgets.tableWidget.setItem(row_position+1, 0, QTableWidgetItem(" "))
-            widgets.tableWidget.setItem(row_position+1, 1, QTableWidgetItem(" "))
-            widgets.tableWidget.setItem(row_position+1, 2, QTableWidgetItem(" "))
-            widgets.tableWidget.setItem(row_position+1, 3, QTableWidgetItem(" "))
-            print(f'Button "{btnName}" pressed!')
+        row_position = widgets.tableWidget.rowCount()
+        widgets.tableWidget.insertRow(row_position)
+        widgets.tableWidget.setItem(row_position+1, 0, QTableWidgetItem(" "))
+        widgets.tableWidget.setItem(row_position+1, 1, QTableWidgetItem(" "))
+        widgets.tableWidget.setItem(row_position+1, 2, QTableWidgetItem(" "))
+        widgets.tableWidget.setItem(row_position+1, 3, QTableWidgetItem(" "))
+        print(f'Button "{btnName}" pressed!')
+
+    def AddColumnButton(self):
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        if self.extraValueBool == False: # if extra collumn doesnt exist, let it add a new one
+            self.extraValueBool = True
+            column_position = widgets.tableWidget.columnCount()
+            widgets.tableWidget.insertColumn(column_position)
+            widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
+        print(f'Button "{btnName}" pressed!')
 
     def DeleteRowButton(self):
         # GET BUTTON CLICKED
@@ -224,6 +236,7 @@ class MainWindow(QMainWindow):
         y = float(0)
         polygonName = ""
         value = float(0)
+        extraValue = float(0)
         heightFactor = float(1)
         coordinates = []
         outlineIsChecked = False
@@ -282,14 +295,18 @@ class MainWindow(QMainWindow):
                         value=float(widgets.lineEdit_Height_SetConst.text())
                     else: value = 1
                     value *= heightFactor
-            coordinates.append(CreateCoordinates(x, y, value, polygonName))
+                elif column == 4:
+                    if isCellEmpty(row, column): extraValue = 0
+                    else: extraValue=float(widgets.tableWidget.item(row, column).text())
+            coordinates.append(CreateCoordinates(x, y, value, polygonName, extraValue))
 
         if widgets.checkBox_Outline.isChecked(): outlineIsChecked = True
         if self.exeptionHandler("NameLess"):
             if widgets.Radio_Color_AccordingToConstent.isChecked():
                 choseColor()
             else: self.color = "Na"
-            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
+            if self.extraValueBool == True:
+                finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         
