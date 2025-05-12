@@ -38,11 +38,16 @@ class MakeFile:
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
         self.__barColor = barColor # color of the bar graph
+        self.__rawExtraValues = [] # a list of extra values to be used for the bar graph
         self.min = self.__coordObjList[0].getZ()
         self.max = self.__coordObjList[0].getZ()
         for i in range(len(self.__coordObjList)):
             if self.__coordObjList[i].getZ() < self.min: self.min = self.__coordObjList[i].getZ()
             if self.__coordObjList[i].getZ() > self.max: self.max = self.__coordObjList[i].getZ()
+            if self.__coordObjList[i].getZ2() is None or self.__coordObjList[i].getZ2() == "":
+                self.__rawExtraValues.append(0)
+            else:
+                self.__rawExtraValues.append(self.__coordObjList[i].getZ2())
     
 
     def convertToHex(self, color):
@@ -70,11 +75,11 @@ class MakeFile:
         target_min = 0.00050  # New target min
         target_max = 0.00250  # New target max
 
-        a1_min = min(a1_list)
-        a1_max = max(a1_list)
+        a1_min = min(self.__rawExtraValues)
+        a1_max = max(self.__rawExtraValues)
 
         # Normalize a1 values to [0,1]
-        a1_normalized = [(x - a1_min) / (a1_max - a1_min) for x in a1_list]
+        a1_normalized = [(x - a1_min) / (a1_max - a1_min) for x in self.__rawExtraValues]
 
         # Rescale normalized values to [target_min, target_max]
         scaled_values = [x * (target_max - target_min) + target_min for x in a1_normalized]
