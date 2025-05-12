@@ -100,7 +100,7 @@ class MainWindow(QMainWindow):
         widgets.btn_addRow.clicked.connect(self.AddRowButton)
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_deleteSelected.clicked.connect(self.DeleteSelectedRowsButton)
-        widgets.btn_addCol.clicked.connect(self.AddColumnButton)
+        widgets.btn_toggleCol.clicked.connect(self.ToggleColumnButton)
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
@@ -167,7 +167,7 @@ class MainWindow(QMainWindow):
         widgets.tableWidget.setItem(row_position+1, 3, QTableWidgetItem(" "))
         print(f'Button "{btnName}" pressed!')
 
-    def AddColumnButton(self):
+    def ToggleColumnButton(self):
         # GET BUTTON CLICKED
         btn = self.sender()
         btnName = btn.objectName()
@@ -177,6 +177,11 @@ class MainWindow(QMainWindow):
             column_position = widgets.tableWidget.columnCount()
             widgets.tableWidget.insertColumn(column_position)
             widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
+        elif self.extraValueBool == True:
+            self.extraValueBool = False
+            column_position = widgets.tableWidget.columnCount()
+            widgets.tableWidget.removeColumn(column_position-1)
+            # widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
         print(f'Button "{btnName}" pressed!')
 
     def DeleteRowButton(self):

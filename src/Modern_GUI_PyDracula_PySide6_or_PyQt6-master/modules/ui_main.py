@@ -1077,10 +1077,10 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout.addWidget(self.btn_deleteSelected)
 
-                self.btn_addCol = QPushButton(self.widgets)
-                self.btn_addCol.setObjectName(u"btn_addCol")
+                self.btn_toggleCol = QPushButton(self.widgets)
+                self.btn_toggleCol.setObjectName(u"btn_toggleCol")
 
-                self.verticalLayout.addWidget(self.btn_addCol)
+                self.verticalLayout.addWidget(self.btn_toggleCol)
 
                 self.stackedWidget.addWidget(self.widgets)
                 self.new_page = QWidget()
@@ -1398,7 +1398,7 @@ class Ui_MainWindow(object):
                 self.btn_addRow.setText(QCoreApplication.translate("MainWindow", u"Add Row", None))
                 self.btn_deleteRow.setText(QCoreApplication.translate("MainWindow", u"Delete Row", None))
                 self.btn_deleteSelected.setText(QCoreApplication.translate("MainWindow", u"Delete Selected Rows", None))
-                self.btn_addCol.setText(QCoreApplication.translate("MainWindow", u"Add Column", None))
+                self.btn_toggleCol.setText(QCoreApplication.translate("MainWindow", u"Toggle Column", None))
                 self.groupBox_2.setTitle(QCoreApplication.translate("MainWindow", u"Size", None))
                 self.label_2.setText(QCoreApplication.translate("MainWindow", u"Size", None))
                 self.groupBox_4.setTitle(QCoreApplication.translate("MainWindow", u"Height", None))
