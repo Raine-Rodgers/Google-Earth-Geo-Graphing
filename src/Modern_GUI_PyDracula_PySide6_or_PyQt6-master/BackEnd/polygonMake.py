@@ -1,6 +1,7 @@
 import colorsys
 import simplekml
 from pykml import parser
+import math
 #TODO: use pykml to parse file and get coordinates
 
 # create an object with x, y, z values, a name for the polyogn. the z coordinate will represent the value of the polyogn
@@ -38,6 +39,7 @@ class MakeFile:
         self.__kml = simplekml.Kml() # creat the kml variable to uses
         self.__outlineIsChecked = outlineIsChecked # if the outline is checked or not
         self.__barColor = barColor # color of the bar graph
+        self.__scaledValues = [] # a list of scaled values to be used for the bar graph
         self.__rawExtraValues = [] # a list of extra values to be used for the bar graph
         self.min = self.__coordObjList[0].getZ()
         self.max = self.__coordObjList[0].getZ()
@@ -78,14 +80,17 @@ class MakeFile:
         a1_min = min(self.__rawExtraValues)
         a1_max = max(self.__rawExtraValues)
 
-        # Normalize a1 values to [0,1]
-        a1_normalized = [(x - a1_min) / (a1_max - a1_min) for x in self.__rawExtraValues]
+        if a1_min == a1_max:
+            a1_normalized = [0] * len(self.__rawExtraValues)  # Avoid division by zero
+        else:
+            # Normalize a1 values to [0,1]
+            a1_normalized = [(x - a1_min) / (a1_max - a1_min) for x in self.__rawExtraValues]
 
         # Rescale normalized values to [target_min, target_max]
-        scaled_values = [x * (target_max - target_min) + target_min for x in a1_normalized]
+        self.__scaledValues = [x * (target_max - target_min) + target_min for x in a1_normalized]
 
         # Output the scaled values and the average b1 multiplier
-        print("Scaled values:", scaled_values)
+        print("Scaled values:", self.__scaledValues)
 
 
     def saveFile(self):
@@ -93,34 +98,55 @@ class MakeFile:
 
 
     def makePolygon(self):
-        for i in range(len(self.__coordObjList)): # iterate through the list of coordinate objects
-            pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),          self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00039,  self.__coordObjList[i].getY()-0.00019,  self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00062,  self.__coordObjList[i].getY()+0.00013,  self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX()+0.00023,  self.__coordObjList[i].getY()+0.00033,  self.__coordObjList[i].getZ()),
-                                                                                                (self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),          self.__coordObjList[i].getZ()),])
+        for i in range(len(self.__coordObjList)):  # iterate through the list of coordinate objects
+            x = self.__coordObjList[i].getX()
+            y = self.__coordObjList[i].getY()
+
+            # Adjust longitude offset based on latitude
+            self.normalizeExtraValues()
+            offset = self.__scaledValues[i]
+            lon_offset = offset / abs(math.cos(math.radians(y)))
+
+            pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(),
+                outerboundaryis=[(x - lon_offset, y - 0.001,  self.__coordObjList[i].getZ()),
+                                (x + lon_offset, y - 0.001,  self.__coordObjList[i].getZ()),
+                                (x + lon_offset, y + 0.001,  self.__coordObjList[i].getZ()),
+                                (x - lon_offset, y + 0.001,  self.__coordObjList[i].getZ()),
+                                (x - lon_offset, y - 0.001,   self.__coordObjList[i].getZ()),])
             print(self.__coordObjList[i])
-            pol.extrude = 1 # connect it to the roud
-            pol.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
+            pol.extrude = 1  # connect it to the ground
+            pol.altitudemode = simplekml.AltitudeMode.relativetoground  # set distance relative to ground to avoid clipping
             if self.__barColor == "Na":
-                pol.style.polystyle.color = self.convertToHex(self.__coordObjList[i].getZ())#simplekml.Color.changealphaint(200, simplekml.Color.) # set color of polygonw // 
+                pol.style.polystyle.color = self.convertToHex(self.__coordObjList[i].getZ())
             else:
                 print(self.__barColor)
                 pol.style.polystyle.color = self.__barColor
-            if self.__outlineIsChecked: pol.style.polystyle.outline = 1
-            else: pol.style.polystyle.outline = 0
-            pol.style.polystyle.fill = 1 # set fill of polygon
-            pol.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon
+            if self.__outlineIsChecked:
+                pol.style.polystyle.outline = 1
+            else:
+                pol.style.polystyle.outline = 0
+            pol.style.polystyle.fill = 1  # set fill of polygon
+            pol.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green)  # set outline color of polygon
 
             if self.__coordObjList[i].getZ2() != 0:
-                pol2 = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),            5),
-                                                                                                     (self.__coordObjList[i].getX()+0.00039,  self.__coordObjList[i].getY()-0.00019,    5),
-                                                                                                     (self.__coordObjList[i].getX()+0.00062,  self.__coordObjList[i].getY()+0.00013,    5),
-                                                                                                     (self.__coordObjList[i].getX()+0.00023,  self.__coordObjList[i].getY()+0.00033,    5),
-                                                                                                     (self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),            5)])
+                
+                # Define rectangle vertices using scaledValues as offsets
+                
+
+                pol2 = self.__kml.newpolygon(name=self.__coordObjList[i].getName() + "2",
+                outerboundaryis=[
+                    (x - lon_offset, y - offset, 5),  # Bottom-left corner
+                    (x + lon_offset, y - offset, 5),  # Bottom-right corner
+                    (x + lon_offset, y + offset, 5),  # Top-right corner
+                    (x - lon_offset, y + offset, 5),  # Top-left corner
+                    (x - lon_offset, y - offset, 5)   # Close the square
+                ])
+
+                print("Error: " + str(i))
+                print(self.__scaledValues)
                 print(self.__coordObjList[i])
                 pol2.extrude = 1
-                pol2.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
+                pol2.altitudemode = simplekml.AltitudeMode.relativetoground  # set distance relative to ground to avoid clipping
                 pol2.style.polystyle.outline = 0
-                pol2.style.polystyle.fill = 1 # set fill of polygon
-                pol2.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon
+                pol2.style.polystyle.fill = 1  # set fill of polygon
+                pol2.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green)  # set outline color of polygon
