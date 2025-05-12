@@ -64,6 +64,23 @@ class MakeFile:
         hex_code = 'ff%02x%02x%02x' % (int(b * 255), int(g * 255), int(r * 255))
         
         return hex_code
+    
+    def normalizeExtraValues(self):
+        a1_list = [10, 20, 30, 40, 50]  # Example inputs
+        target_min = 0.00050  # New target min
+        target_max = 0.00250  # New target max
+
+        a1_min = min(a1_list)
+        a1_max = max(a1_list)
+
+        # Normalize a1 values to [0,1]
+        a1_normalized = [(x - a1_min) / (a1_max - a1_min) for x in a1_list]
+
+        # Rescale normalized values to [target_min, target_max]
+        scaled_values = [x * (target_max - target_min) + target_min for x in a1_normalized]
+
+        # Output the scaled values and the average b1 multiplier
+        print("Scaled values:", scaled_values)
 
 
     def saveFile(self):
@@ -89,3 +106,16 @@ class MakeFile:
             else: pol.style.polystyle.outline = 0
             pol.style.polystyle.fill = 1 # set fill of polygon
             pol.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon
+
+            if self.__coordObjList[i].getZ2() != 0:
+                pol2 = self.__kml.newpolygon(name=self.__coordObjList[i].getName(), outerboundaryis=[(self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),            5),
+                                                                                                     (self.__coordObjList[i].getX()+0.00039,  self.__coordObjList[i].getY()-0.00019,    5),
+                                                                                                     (self.__coordObjList[i].getX()+0.00062,  self.__coordObjList[i].getY()+0.00013,    5),
+                                                                                                     (self.__coordObjList[i].getX()+0.00023,  self.__coordObjList[i].getY()+0.00033,    5),
+                                                                                                     (self.__coordObjList[i].getX(),          self.__coordObjList[i].getY(),            5)])
+                print(self.__coordObjList[i])
+                pol2.extrude = 1
+                pol2.altitudemode = simplekml.AltitudeMode.relativetoground # set distance relative to ground to avoid clipping
+                pol2.style.polystyle.outline = 0
+                pol2.style.polystyle.fill = 1 # set fill of polygon
+                pol2.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green) # set outline color of polygon

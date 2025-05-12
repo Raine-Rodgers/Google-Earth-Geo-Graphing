@@ -305,8 +305,7 @@ class MainWindow(QMainWindow):
             if widgets.Radio_Color_AccordingToConstent.isChecked():
                 choseColor()
             else: self.color = "Na"
-            if self.extraValueBool == True:
-                finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
+            finalFile = MakeFile(coordinates, widgets.lineEdit_FileName.text(), outlineIsChecked, self.color, self.filePath)
             finalFile.makePolygon()
             finalFile.saveFile()
         
