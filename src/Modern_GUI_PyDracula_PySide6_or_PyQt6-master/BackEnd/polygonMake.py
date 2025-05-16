@@ -74,8 +74,8 @@ class MakeFile:
     
     def normalizeExtraValues(self):
         a1_list = [10, 20, 30, 40, 50]  # Example inputs
-        target_min = 0.00050  # New target min
-        target_max = 0.00250  # New target max
+        target_min = 0.00040  # New target min
+        target_max = 0.00150  # New target max
 
         a1_min = min(self.__rawExtraValues)
         a1_max = max(self.__rawExtraValues)
@@ -107,12 +107,15 @@ class MakeFile:
             offset = self.__scaledValues[i]
             lon_offset = offset / abs(math.cos(math.radians(y)))
 
+            barOffset = 0.0001
+            barLon_offset = barOffset / abs(math.cos(math.radians(y)))
+
             pol = self.__kml.newpolygon(name=self.__coordObjList[i].getName(),
-                outerboundaryis=[(x - lon_offset, y - 0.001,  self.__coordObjList[i].getZ()),
-                                (x + lon_offset, y - 0.001,  self.__coordObjList[i].getZ()),
-                                (x + lon_offset, y + 0.001,  self.__coordObjList[i].getZ()),
-                                (x - lon_offset, y + 0.001,  self.__coordObjList[i].getZ()),
-                                (x - lon_offset, y - 0.001,   self.__coordObjList[i].getZ()),])
+                outerboundaryis=[(x - barLon_offset, y - barOffset,  self.__coordObjList[i].getZ()),
+                                (x + barLon_offset, y - barOffset,  self.__coordObjList[i].getZ()),
+                                (x + barLon_offset, y + barOffset,  self.__coordObjList[i].getZ()),
+                                (x - barLon_offset, y + barOffset,  self.__coordObjList[i].getZ()),
+                                (x - barLon_offset, y - barOffset,   self.__coordObjList[i].getZ()),])
             print(self.__coordObjList[i])
             pol.extrude = 1  # connect it to the ground
             pol.altitudemode = simplekml.AltitudeMode.relativetoground  # set distance relative to ground to avoid clipping
@@ -147,6 +150,7 @@ class MakeFile:
                 print(self.__coordObjList[i])
                 pol2.extrude = 1
                 pol2.altitudemode = simplekml.AltitudeMode.relativetoground  # set distance relative to ground to avoid clipping
-                pol2.style.polystyle.outline = 0
+                pol2.style.polystyle.outline = 1
                 pol2.style.polystyle.fill = 1  # set fill of polygon
+                pol2.style.polystyle.color = simplekml.Color.changealphaint(200, simplekml.Color.blue)
                 pol2.style.polystyle.outline = simplekml.Color.changealphaint(200, simplekml.Color.green)  # set outline color of polygon
