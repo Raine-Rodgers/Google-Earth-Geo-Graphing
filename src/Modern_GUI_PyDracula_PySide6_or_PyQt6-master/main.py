@@ -21,6 +21,8 @@ from BackEnd.polygonMake import *
 import pickle
 import subprocess
 
+import json  # Add this import at the top of the file
+
 # IMPORT / GUI AND MODULES AND WIDGETS
 # ///////////////////////////////////////////////////////////////
 from modules import *
@@ -48,19 +50,35 @@ class MainWindow(QMainWindow):
         global widgets
         widgets = self.ui
         global save_file
-        save_file = "save.p"
+        save_file = "save"  # No need to include the `.json` extension here; it will be added in the code
+
         try:
-            if os.path.isfile(f"{documents_folder}/{save_file}"):
-                temp = pickle.load(open(f"{documents_folder}/{save_file}", "rb"))
-                tempRow = 1
-                while len(temp) > 0:
-                    tempRow += 1
-                    for column in range(widgets.tableWidget.columnCount()):
-                        if tempRow > widgets.tableWidget.rowCount():
-                            widgets.tableWidget.insertRow(tempRow-1)
-                        widgets.tableWidget.setItem(tempRow-1, column, QTableWidgetItem(temp.pop(0)))
-        except EOFError:
-            print("No data to load")
+            # Check if the JSON file exists
+            if os.path.isfile(f"{documents_folder}/{save_file}.json"):
+                with open(f"{documents_folder}/{save_file}.json", "r") as json_file:
+                    data = json.load(json_file)
+
+                # Restore the state of extraValueBool
+                self.extraValueBool = data.get("extraValueBool", False)  # Default to False if not found
+                if self.extraValueBool:
+                    # If extraValueBool is True, add the extra column
+                    self.extraValueBool = True # i dont trust this so imma make sure its true
+                    column_position = widgets.tableWidget.columnCount()
+                    widgets.tableWidget.insertColumn(column_position)
+                    widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
+                # Restore table data
+                current_row = 0
+                for row_data in data["tableData"]:
+                    current_row += 1
+                    # tempRow = widgets.tableWidget.rowCount()
+                    # widgets.tableWidget.insertRow(tempRow)
+                    for column, cell_data in enumerate(row_data):
+                        widgets.tableWidget.setItem(current_row, column, QTableWidgetItem(cell_data))
+
+                # # Restore the state of extraValueBool
+                # self.extraValueBool = data.get("extraValueBool", False)  # Default to False if not found
+        except json.JSONDecodeError:
+            print("Error decoding JSON file")
         except FileNotFoundError:
             print("File not found")
         except Exception as e:
@@ -349,14 +367,40 @@ class MainWindow(QMainWindow):
                 #messagebox.showerror("Error", "Please enter a valid hex code")
         else: return False
 
+
+    
+
     def myExitHandler(self):
-        pickledArray = []
+        # Prepare data to save
+        data = {
+            "tableData": [],
+            "extraValueBool": self.extraValueBool  # Save the state of extraValueBool
+        }
+
+        # Collect table data
         for row in range(1, widgets.tableWidget.rowCount()):
+            row_data = []
             for column in range(widgets.tableWidget.columnCount()):
-                print(row, column)
-                if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
-                else: pickledArray.append(widgets.tableWidget.item(row, column).text())
-        pickle.dump( pickledArray, open( f"{documents_folder}/{save_file}", "wb" ))
+                if widgets.tableWidget.item(row, column) is None:
+                    row_data.append("")  # Save empty cells as empty strings
+                else:
+                    row_data.append(widgets.tableWidget.item(row, column).text())
+            data["tableData"].append(row_data)
+
+        # Save to a JSON file
+        with open(f"{documents_folder}/{save_file}.json", "w") as json_file:
+            json.dump(data, json_file, indent=4)
+        print(f"Data saved to {documents_folder}/{save_file}.json")
+
+
+    # def myExitHandler(self):
+    #     pickledArray = []
+    #     for row in range(1, widgets.tableWidget.rowCount()):
+    #         for column in range(widgets.tableWidget.columnCount()):
+    #             print(row, column)
+    #             if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
+    #             else: pickledArray.append(widgets.tableWidget.item(row, column).text())
+    #     pickle.dump( pickledArray, open( f"{documents_folder}/{save_file}", "wb" ))
 
 
     # RESIZE EVENTS
