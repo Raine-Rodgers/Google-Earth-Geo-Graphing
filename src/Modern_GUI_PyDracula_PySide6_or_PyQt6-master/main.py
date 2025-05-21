@@ -18,7 +18,6 @@ import sys
 import os
 import platform
 from BackEnd.polygonMake import *
-import pickle
 import subprocess
 
 import json  # Add this import at the top of the file
@@ -35,6 +34,7 @@ widgets = None
 class MainWindow(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
+                    
 
         # SET AS GLOBAL WIDGETS
         # ///////////////////////////////////////////////////////////////
@@ -58,6 +58,8 @@ class MainWindow(QMainWindow):
                 with open(f"{documents_folder}/{save_file}.json", "r") as json_file:
                     data = json.load(json_file)
 
+                    self.startupDeleteRows()
+
                 # Restore the state of extraValueBool
                 self.extraValueBool = data.get("extraValueBool", False)  # Default to False if not found
                 if self.extraValueBool:
@@ -68,10 +70,10 @@ class MainWindow(QMainWindow):
                     widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
                 # Restore table data
                 current_row = 0
+                print(len(data["tableData"]))
                 for row_data in data["tableData"]:
                     current_row += 1
-                    # tempRow = widgets.tableWidget.rowCount()
-                    # widgets.tableWidget.insertRow(tempRow)
+                    widgets.tableWidget.insertRow(current_row)
                     for column, cell_data in enumerate(row_data):
                         widgets.tableWidget.setItem(current_row, column, QTableWidgetItem(cell_data))
 
@@ -122,6 +124,7 @@ class MainWindow(QMainWindow):
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
+
         # EXTRA LEFT BOX
         def openCloseLeftBox():
             UIFunctions.toggleLeftBox(self, True)
@@ -151,6 +154,12 @@ class MainWindow(QMainWindow):
     # Post here your functions for clicked buttons
     # ///////////////////////////////////////////////////////////////
 
+    # delete all rows on startup when applicable
+    def startupDeleteRows(self):
+        for i in range(widgets.tableWidget.rowCount()-1):
+            if widgets.tableWidget.rowCount() > 1:
+                widgets.tableWidget.removeRow(widgets.tableWidget.rowCount() - 1)
+                    
     def HomeButton(self):
         # GET BUTTON CLICKED
         btn = self.sender()
@@ -381,26 +390,26 @@ class MainWindow(QMainWindow):
         for row in range(1, widgets.tableWidget.rowCount()):
             row_data = []
             for column in range(widgets.tableWidget.columnCount()):
-                if widgets.tableWidget.item(row, column) is None:
+                if widgets.tableWidget.item(row, column) is None or widgets.tableWidget.item(row, column).text() == "":
+                    blankCount = 0
+                    for i in range (widgets.tableWidget.columnCount()): # if one cell is empty, check if the entire row is as well
+                        if widgets.tableWidget.item(row, i) is None or widgets.tableWidget.item(row, i).text() == "":
+                            blankCount += 1
+                        else:
+                            break
+                    if blankCount >= 3:
+                        break
                     row_data.append("")  # Save empty cells as empty strings
                 else:
                     row_data.append(widgets.tableWidget.item(row, column).text())
-            data["tableData"].append(row_data)
+            if len(row_data) > 0:  # Only append non-empty rows
+                data["tableData"].append(row_data)
+            
 
         # Save to a JSON file
         with open(f"{documents_folder}/{save_file}.json", "w") as json_file:
             json.dump(data, json_file, indent=4)
         print(f"Data saved to {documents_folder}/{save_file}.json")
-
-
-    # def myExitHandler(self):
-    #     pickledArray = []
-    #     for row in range(1, widgets.tableWidget.rowCount()):
-    #         for column in range(widgets.tableWidget.columnCount()):
-    #             print(row, column)
-    #             if widgets.tableWidget.item(row, column) is None: pickledArray.append(" ")
-    #             else: pickledArray.append(widgets.tableWidget.item(row, column).text())
-    #     pickle.dump( pickledArray, open( f"{documents_folder}/{save_file}", "wb" ))
 
 
     # RESIZE EVENTS
