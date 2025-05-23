@@ -1426,4 +1426,4 @@ class Ui_MainWindow(object):
 
                 self.label_Color_HexCode.setText(QCoreApplication.translate("MainWindow", u"Hex Code", None))
                 self.creditsLabel.setText(QCoreApplication.translate("MainWindow", u"By: Raine M. Rodgers", None))
-                self.version.setText(QCoreApplication.translate("MainWindow", u"V0.9.5", None))
+                self.version.setText(QCoreApplication.translate("MainWindow", u"V1.0.0", None))
