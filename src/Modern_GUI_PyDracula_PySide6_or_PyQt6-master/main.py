@@ -52,44 +52,8 @@ class MainWindow(QMainWindow):
         global save_file
         save_file = "save"  # No need to include the `.json` extension here; it will be added in the code
 
-        
         self.OpenSaveFile()  # Call the function to open the saved JSON file and run the necessary functions
 
-############################
-        # try:
-        #     # Check if the JSON file exists
-        #     if os.path.isfile(f"{documents_folder}/{save_file}.json"):
-        #         with open(f"{documents_folder}/{save_file}.json", "r") as json_file:
-        #             data = json.load(json_file)
-        #             if len(data["tableData"]) >= 1:
-
-        #                 self.startupDeleteRows()
-
-        #                 # Restore the state of extraValueBool
-        #                 self.extraValueBool = data.get("extraValueBool", False)  # Default to False if not found
-        #                 if self.extraValueBool:
-        #                     # If extraValueBool is True, add the extra column
-        #                     self.extraValueBool = True # i dont trust this so imma make sure its true
-        #                     column_position = widgets.tableWidget.columnCount()
-        #                     widgets.tableWidget.insertColumn(column_position)
-        #                     widgets.tableWidget.setItem(0, column_position, QTableWidgetItem("Extra Value"))
-        #                 # Restore table data
-        #                 current_row = 0
-        #                 print(len(data["tableData"]))
-        #                 for row_data in data["tableData"]:
-        #                     current_row += 1
-        #                     widgets.tableWidget.insertRow(current_row)
-        #                     for column, cell_data in enumerate(row_data):
-        #                         widgets.tableWidget.setItem(current_row, column, QTableWidgetItem(cell_data))
-
-        #         # # Restore the state of extraValueBool
-        #         # self.extraValueBool = data.get("extraValueBool", False)  # Default to False if not found
-        # except json.JSONDecodeError:
-        #     print("Error decoding JSON file")
-        # except FileNotFoundError:
-        #     print("File not found")
-        # except Exception as e:
-        #     print(f"An error occurred: {e}")
 
         # USE CUSTOM TITLE BAR | USE AS "False" FOR MAC OR LINUX
         # ///////////////////////////////////////////////////////////////
