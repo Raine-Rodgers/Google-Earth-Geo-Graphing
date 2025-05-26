@@ -90,6 +90,7 @@ class MainWindow(QMainWindow):
         widgets.btn_deleteRow.clicked.connect(self.DeleteRowButton)
         widgets.btn_deleteSelected.clicked.connect(self.DeleteSelectedRowsButton)
         widgets.btn_toggleCol.clicked.connect(self.ToggleColumnButton)
+        widgets.btn_newFile.clicked.connect(self.NewFileButton)
         widgets.btn_ChoseDir.clicked.connect(self.ChoseDirButton)
         app.aboutToQuit.connect(self.myExitHandler) # myExitHandler is a callable
 
@@ -130,7 +131,9 @@ class MainWindow(QMainWindow):
             if os.path.isfile(f"{documents_folder}/{save_file}.json"):
                 with open(f"{documents_folder}/{save_file}.json", "r") as json_file:
                     data = json.load(json_file)
-                    if len(data["tableData"]) <= 0: return # if the file is empty load the default sheet
+                    if len(data["tableData"]) <= 0: 
+                        print("The file is empty, loading default sheet.")
+                        return # if the file is empty load the default sheet
 
                     self.startupDeleteRows() # clear all rows on startup and only add the right amount back
 
@@ -261,6 +264,20 @@ class MainWindow(QMainWindow):
 
         # self.filePath = filedialog.askdirectory()
         # print(self.filePath)
+
+    def NewFileButton(self):
+        # GET BUTTON CLICKED
+        btn = self.sender()
+        btnName = btn.objectName()
+
+        # Reset the table widget
+        self.startupDeleteRows()  # Clear all rows on startup
+        for i in range(10):
+            widgets.tableWidget.insertRow(i+1)
+            widgets.tableWidget.setItem(i+1, 0, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(i+1, 1, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(i+1, 2, QTableWidgetItem(" "))
+            widgets.tableWidget.setItem(i+1, 3, QTableWidgetItem(" "))
 
     def SaveButton(self):
         # GET BUTTON CLICKED

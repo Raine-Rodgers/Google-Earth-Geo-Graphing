@@ -655,6 +655,19 @@ class Ui_MainWindow(object):
 
                 self.verticalLayout_8.addWidget(self.btn_save)
 
+                ############################
+                # create new file test
+
+                self.btn_newFile = QPushButton(self.topMenu)
+                self.btn_newFile.setObjectName(u"btn_newFile")
+                self.btn_newFile.setMinimumSize(QSize(0, 45))
+                self.btn_newFile.setCursor(QCursor(Qt.PointingHandCursor))
+
+                self.btn_newFile.setStyleSheet(u"background-image: url(:/icons/images/icons/cil-plus.png);")
+
+                self.verticalLayout_8.addWidget(self.btn_newFile)
+                ############################
+
 
                 self.verticalMenuLayout.addWidget(self.topMenu, 0, Qt.AlignTop)
 
@@ -1318,8 +1331,9 @@ class Ui_MainWindow(object):
                 MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
                 self.toggleButton.setText(QCoreApplication.translate("MainWindow", u"Hide", None))
                 self.btn_home.setText(QCoreApplication.translate("MainWindow", u"Home", None))
-                self.btn_edit.setText(QCoreApplication.translate("MainWindow", u"New", None))
-                self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Save", None))
+                self.btn_edit.setText(QCoreApplication.translate("MainWindow", u"Options", None))
+                self.btn_save.setText(QCoreApplication.translate("MainWindow", u"Create File", None))
+                self.btn_newFile.setText(QCoreApplication.translate("MainWindow", u"Create New File", None))
                 self.toggleLeftBox.setText(QCoreApplication.translate("MainWindow", u"Left Box", None))
                 self.titleRightInfo.setText(QCoreApplication.translate("MainWindow", u"Google Earth Graph Creator", None))
         #if QT_CONFIG(tooltip)
